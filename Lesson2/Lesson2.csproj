@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="案例9\" />
+    <Folder Include="案例8\" />
+    <Folder Include="案例7\" />
+    <Folder Include="案例6\" />
+    <Folder Include="案例5\" />
+    <Folder Include="案例4\" />
+    <Folder Include="案例3\" />
+  </ItemGroup>
+
+</Project>

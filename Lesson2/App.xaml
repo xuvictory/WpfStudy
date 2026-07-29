@@ -1,0 +1,27 @@
+﻿<Application x:Class="Lesson2.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Lesson2"
+         
+             StartupUri="案例2/StackPanelWindow.xaml"
+             
+             ><!--StartupUri="案例1/GridWindow.xaml"-->
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>
+    
+
+<!--
+    注意事项：StartupUri 接受的是 文件的相对路径（URI），而不是 XML 命名空间（xmlns）映射。
+    
+    写法1：StartupUri="案例1/GridWindow.xaml" ，需要写相对路径（用 / 分隔，不要用 .）
+           优势：简单直观，适合在开发阶段使用
+    
+    写法2：StartupUri="pack://application:,,,/Lesson2;component/案例1/GridWindow.xaml"
+           优势：如果你以后要发布给其他机器用，用包 URI 更稳妥
+    
+           如果文件在根目录下，写法可以简化为：StartupUri="pack://application:,,,/GridWindow.xaml"
+      
+    
+-->
