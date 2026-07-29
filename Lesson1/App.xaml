@@ -1,9 +1,60 @@
 ﻿<Application x:Class="Lesson1.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Lesson1"
+             xmlns:local="clr-namespace:Lesson1" 
              StartupUri="MainWindow.xaml">
+    <!--StartupUri="MainWindow.xaml" ShutdownMode="OnMainWindowClose">-->
     <Application.Resources>
          
     </Application.Resources>
 </Application>
+
+<!--
+    1，x:Class
+    把界面 XAML 和后台 C# 代码“粘”在一起
+    
+    - 含义：告诉编译器，这个 Application.xaml 文件要与哪个 C# 后台类合并。
+    - 作用：编译时，XAML 中定义的 UI 和事件会被编译成一个 partial（分部类），与 App.xaml.cs 中的 partial class App 合并成一个完整的类。
+    - 关键点：对应项目中的 App.xaml.cs 文件里的命名空间和类名。如果写错了，编译会报错“找不到分部类”。
+    
+    2，xmlns
+    默认 XML 命名空间；引入 WPF 控件库（默认）
+    
+    - 含义：这是默认的 XML 命名空间（没有冒号前缀）。
+    - 作用：它告诉编译器，在这个 XAML 文件中，不加前缀的标签（如 <Grid>、<Button>、<Window>）都来自 WPF 的核心 UI 库。
+    - 通俗理解：相当于 C# 顶部的 using System.Windows.Controls;，让你可以直接写 Button 而不用写全限定名。
+    
+    3，xmlns:x
+    引入 XAML 编译指令库
+    
+    - 含义：定义了一个XAML 语言专用的命名空间，前缀是 x。
+    - 作用：它包含的是 XAML 语法本身的编译指令，而不是 WPF 的控件。
+    常见的有：
+    - x:Class（指定后台类）
+    - x:Name（给控件起名字）
+    - x:Key（资源字典的键）
+    - x:Static（引用静态属性）
+    - 区分：不加前缀的 xmlns 管“控件”；加 x: 前缀的管“XAML 语法规则”。
+    
+    4，StartupUri
+    设定程序进门先看哪个页面
+    
+    - 含义：应用程序启动时默认加载并显示哪个窗口。
+    - 作用：程序运行后，会自动创建 MainWindow.xaml 对应的窗口实例并调用 Show()。
+    - 替代方案：你也可以不写这个属性，转而在 App.xaml.cs 的 OnStartup 方法里手动 new MainWindow().Show();，这样可以更灵活地控制启动逻辑（比如先判断登录状态）。
+    
+    5，ShutdownMode
+    控制应用程序何时自动退出
+    
+    - 含义：ShutdownMode 是 Application 类的一个属性，用来设定 WPF 应用程序在什么条件下自动调用 Shutdown() 方法结束进程。它决定了应用的“生命周期终止策略”。
+    - 作用：通过修改此属性，你可以改变程序的关闭行为。它有三种枚举值：
+            - OnLastWindowClose（默认值）：当最后一个窗口关闭时，应用自动退出。适用于常规多窗口应用。
+            - OnMainWindowClose：当主窗口（Application.MainWindow）关闭时，应用自动退出，其他打开的子窗口会被一并关闭。适用于主窗口主导的应用。
+            - OnExplicitShutdown：应用不会自动退出，必须由你手动调用 Application.Current.Shutdown() 才会结束。适用于后台常驻任务或托盘程序，需要你自己控制退出时机。
+    - 关键点：该属性通常在 App.xaml 中配置（如 ShutdownMode="OnMainWindowClose"），也可以在 App.xaml.cs 的 OnStartup 事件中动态赋值。
+
+    新手容易忽略：
+    如果你把主窗口隐藏了（Visibility="Hidden"）但没关闭它，且模式设为 OnMainWindowClose，应用不会退出；
+    另外，使用 OnExplicitShutdown 时若忘记手动调用 Shutdown()，应用会在后台一直运行（进程不消失），需要在任务管理器里强制结束。
+-->
+    

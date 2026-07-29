@@ -4,9 +4,95 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lesson1"
+        
+        xmlns:ucl="clr-namespace:Lesson1.案例2"
+        
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" 
+        
+        WindowStartupLocation="CenterScreen"
+        WindowState="Normal"
+        WindowStyle="SingleBorderWindow"
+        >
     <Grid>
-
+        <Button Content="我是主窗体"/>
     </Grid>
+    
+    <!--案例2-->
+    <!--<Grid>
+        <ucl:NewUserControl/>
+    </Grid>-->
 </Window>
+
+<!--
+    1，xmlns:d 
+    设计时命名空间
+    
+    - 全称：Design（设计）
+    - 作用：这个前缀 d: 专门用来给控件设置“设计时属性”。这些属性只在 Visual Studio 的设计窗口里生效，程序跑起来（运行时）完全忽略。
+    - 典型应用场景：
+      - d:DataContext：在设计器中给窗口指定一个假的数据模型，让界面预览时能看到表格、列表里填满了“假数据”，方便调整布局。而程序运行时，代码会重新绑定真实的数据库数据。
+      - d:DesignWidth / d:DesignHeight：覆盖设计器预览时的尺寸（但运行时窗口依然走 Width / Height）。
+      - 关键语法：所有带 d: 前缀的属性，编译时都会被自动剥离。
+    
+    2，xmlns:mc
+    标记兼容性命名空间
+    
+    - 全称：Markup Compatibility（标记兼容性）
+    - 作用：这是一个“元命名空间”，它本身不直接控制界面样式，而是提供一套处理 XAML 解析兼容性的指令。最核心的指令就是下面要说的 mc:Ignorable。
+    
+    3，mc:Ignorable="d"
+    忽略机制指令—— 核心开关
+    
+    - 字面意思：“请忽略前缀为 d 的东西”。
+    - 底层逻辑：XAML 解析器在编译时，看到这行指令，就会把 <Window> 标签里所有 d: 开头的属性当作“不存在”。如果没有这行指令，编译器发现 d:DataContext 这种不认识的标准属性，就会直接报编译错误。
+    - 工作原理：mc:Ignorable 先告诉编译器“d 前缀的东西可以跳过”。所以，VS 设计器可以利用 d: 前缀做好看的预览，而编译器在生成 exe 时无视这些代码，两全其美。
+
+    4，xmlns:local="clr-namespace:Lesson1"
+    引用当前项目的命名空间
+    
+    5，WindowStartupLocation
+    控制窗口第一次显示时的屏幕位置
+    
+    - 含义：WindowStartupLocation 是 Window 类的一个依赖属性，用来指定窗口在首次调用 Show() 或 ShowDialog() 时，相对于屏幕或父窗口的初始定位方式。
+    - 作用：通过设置此属性，你可以让窗口自动居中显示，避免每次都需要手动计算 Left 和 Top 坐标。它有三种枚举值：
+            - Manual（默认值）：窗口位置由 Left 和 Top 属性显式决定。如果你不设置这两个值，窗口会默认出现在屏幕的左上角（坐标 0,0）。
+            - CenterScreen：窗口始终在当前屏幕（鼠标所在显示器或主显示器）的正中央显示，忽略 Left 和 Top 的值。
+            - CenterOwner：窗口相对于其拥有者（Owner 属性指定的窗口）的正中央显示。必须设置了 Owner 属性才会生效，否则会回退为 CenterScreen 行为。
+    - 关键点：该属性需要在窗口显示之前设置（通常在 XAML 中或构造函数里），一旦窗口显示后再修改不会产生效果。
+    
+    新手常见误区：
+    CenterOwner 只对通过 Window.Owner = 父窗口 建立的“拥有关系”有效，而不是按父子层级（如嵌套容器）自动生效；
+    另外，如果你把窗口的 WindowStyle 设为 None 且启用了全屏，这个定位属性可能会被系统行为覆盖，此时建议手动计算位置。
+    
+    6，WindowState
+    控制窗口在屏幕上的显示状态（大小和可见性）
+    
+    - 含义：WindowState 是 Window 类的一个依赖属性，用来指定窗口是处于正常尺寸、最大化填充屏幕，还是最小化到任务栏的状态。它决定了窗口启动时的视觉呈现方式。
+    - 作用：通过设置此属性，你可以让窗口默认以全屏模式启动、启动后自动收起到任务栏，或者恢复到用户上次关闭时的尺寸。它有三种枚举值：
+            - Normal（默认值）：窗口以 Width 和 Height 属性指定的尺寸显示，并应用 WindowStyle 定义的边框和标题栏。
+            - Maximized：窗口铺满当前屏幕（任务栏上方区域），Width 和 Height 的值会被系统覆盖，但当你切换回 Normal 时会恢复原值。
+            - Minimized：窗口最小化到任务栏，不占用桌面空间，但应用进程仍在运行。点击任务栏图标可恢复。
+    - 关键点：该属性可以在 XAML 中声明，也可以在 Loaded 或 SourceInitialized 事件中动态修改。
+
+    新手常踩的坑：
+    如果你在窗口构造函数或 OnStartup 中设置 Maximized，之后又在 Loaded 事件里读取 Width，此时拿到的可能是之前设计的值而不是实际屏幕尺寸，需要改用 ActualWidth 或 RestoreBounds；
+    另外，Minimized 状态下调用 ShowDialog() 会抛出异常，因为模态窗口不允许最小化，需要先改为 Normal 再显示；
+    最后，当窗口为 Maximized 时，修改 Left/Top 或 Width/Height 不会生效，需要先切回 Normal 再调整。
+    
+    7，WindowStyle
+    控制窗口的非客户区外观（边框、标题栏和系统按钮）
+    
+    - 含义：WindowStyle 是 Window 类的一个依赖属性，用来指定窗口的边框样式、标题栏的呈现方式，以及最小化/最大化/关闭按钮是否可见。它决定了用户与窗口顶层区域交互的视觉框架。
+    - 作用：通过设置此属性，你可以让窗口呈现标准桌面风格、轻量化工具风格，或完全移除默认装饰以实现自定义 UI。它有四种枚举值：
+            - SingleBorderWindow（默认值）：标准 Windows 窗口，带可拖动的标题栏、系统图标、窗口标题，以及最小化、最大化、关闭三个按钮（根据 ResizeMode 决定哪些按钮可用）。
+            - ThreeDBorderWindow：与 SingleBorderWindow 类似，但边框带有 3D 凸起浮雕效果（视觉风格较老旧，现代 WPF 应用中已不常使用）。
+            - ToolWindow：轻量级窗口风格，标题栏更窄、字体更小，只保留关闭按钮（没有最小化和最大化按钮），且默认不出现在 Alt+Tab 切换列表中（配合 ShowInTaskbar=False 效果更佳），常用于浮动工具栏或辅助面板。
+            - None：完全移除边框、标题栏和所有系统按钮，窗口内容区域直接铺满整个窗口。此时你需要自行实现标题栏拖拽、关闭等功能。
+    - 关键点：该属性必须在窗口显示之前设置（XAML 或构造函数中），窗口显示后动态修改通常不会立即刷新外观，需要借助 WindowState 切换或重新创建窗口来强制生效。
+
+    新手最常踩的坑：
+    当设置 WindowStyle="None" 时，窗口无法拖动、也无法通过边框调整大小，你需要手动处理 MouseLeftButtonDown 事件调用 DragMove()，并设置 ResizeMode="CanResizeWithGrip" 同时添加 ResizeGrip 控件来实现调整大小；
+    另外，如果你想实现窗口透明背景（AllowTransparency="True"），必须同时将 WindowStyle 设为 None，否则透明属性会被系统忽略；
+    最后，ToolWindow 模式下即便你将 ResizeMode 设为 CanResize，标题栏上仍不会出现最大化按钮，但用户依然可以通过双击标题栏或拖动边框来调整大小，这个行为容易让人困惑。
+-->

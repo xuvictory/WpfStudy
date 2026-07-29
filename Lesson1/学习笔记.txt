@@ -1,1 +1,77 @@
-﻿
+﻿一、学习目标
+
+1，了解Wpf目录结构。
+2，了解XAML的基本概念。
+3，简单案例实操。
+
+二、学习实操
+1，Wpf目录结构
+
+   App.xaml：应用程序的入口文件，定义了应用程序的资源和启动逻辑。
+   App.xaml.cs：与App.xaml对应的后台代码文件，处理应用程序的事件和逻辑。
+
+   MainWindow.xaml：主窗体文件，定义了程序的主页面布局。
+   MainWindow.xaml.cs：与MainWindow.xaml对应的后台代码文件，处理窗体的事件和逻辑。
+
+   [两者关联点]
+   App.xaml中关键特性：StartupUri="MainWindow.xaml"
+
+2，XAML的基本概念
+
+   XAML（读作 "Zammel"）全称是 eXtensible Application Markup Language，即可扩展应用程序标记语言。
+   它是一种声明性标记语言，由微软开发，主要用于构建和初始化.NET应用程序的用户界面(UI)。
+
+   官方介绍：https://learn.microsoft.com/zh-cn/dotnet/desktop/wpf/xaml/
+  
+  [主要特点]
+   - 1. 声明式UI定义
+        XAML通过简洁、易于阅读的标记来描述UI，而不是用C#等编程语言编写大量代码。
+
+   - 2. UI与逻辑分离
+        XAML文件（.xaml）负责定义界面外观，而对应的C#等代码文件（.xaml.cs，即“代码隐藏”文件）负责处理事件和业务逻辑。
+        这种分离让设计师和开发者可以更高效地协作。
+
+   - 3. 对象层次结构
+        XAML利用XML的树形结构，能非常清晰、直观地表现UI元素间的父子层级关系。
+
+  [主要解决问题]
+   - 1. UI设计复杂性
+        传统的UI设计需要大量代码，XAML通过声明式标记简化了UI的创建和维护。
+
+   - 2. 可维护性和可扩展性
+        XAML与代码分离，使得UI设计和逻辑处理可以独立进行，提高了代码的可维护性和可扩展性。
+
+   - 3. 跨平台和跨技术集成
+        XAML不仅用于WPF，还被用于UWP、Xamarin.Forms等技术，提供了一种统一的UI定义方式，便于跨平台开发。
+
+  [XAML的工作原理]
+   - 1. 编译过程
+        XAML文件在编译时会被转换为对应的C#或VB.NET代码，这些代码会创建和初始化UI元素。
+
+   - 2. 运行时加载
+        在应用程序运行时，XAML文件会被解析，生成UI元素的实例，并将它们添加到应用程序的视觉树中。
+
+   - 3. 数据绑定和事件处理
+        XAML支持数据绑定，可以将UI元素与数据源关联，实现动态更新。同时，XAML允许定义事件处理器，将用户交互与逻辑代码连接起来。
+
+  [XAML的开发工具]
+  - 1. 设计师
+       Blend for Visual Studio
+       官方学习文档：https://learn.microsoft.com/zh-cn/visualstudio/xaml-tools/creating-a-ui-by-using-blend-for-visual-studio?view=visualstudio
+
+  - 2. 编程人员
+       Visual Studio
+
+3，简单案例实操
+   
+   [案例1]：动态启动指定窗体
+   
+   思路：
+   1，修改App.xaml文件，注释掉StartupUri属性。
+   2，重写App.xaml.cs文件中的OnStartup方法，在方法中动态创建并显示指定的窗体。
+
+   [案例2]：引用自定义命名空间
+   
+   思路：
+   1，创建一个自定义类名的用户控件。
+   2，在XAML中使用xmlns声明自定义命名空间，并使用该命名空间来引用自定义控件。
