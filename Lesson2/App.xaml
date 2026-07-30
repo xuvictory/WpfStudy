@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Lesson2"
          
-             StartupUri="案例2/StackPanelWindow.xaml"
+             StartupUri="案例9/ViewboxWindow.xaml"
              
              ><!--StartupUri="案例1/GridWindow.xaml"-->
     <Application.Resources>

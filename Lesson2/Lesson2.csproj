@@ -8,14 +8,4 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="案例9\" />
-    <Folder Include="案例8\" />
-    <Folder Include="案例7\" />
-    <Folder Include="案例6\" />
-    <Folder Include="案例5\" />
-    <Folder Include="案例4\" />
-    <Folder Include="案例3\" />
-  </ItemGroup>
-
 </Project>

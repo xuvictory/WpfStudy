@@ -1,0 +1,241 @@
+﻿<Window x:Class="Lesson2.案例9.ViewboxWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lesson2.案例9"
+        mc:Ignorable="d"
+        Title="ViewboxWindow" 
+        Height="550" 
+        Width="800"
+        WindowStartupLocation="CenterScreen"
+        Background="#F0F2F5">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- 标题 -->
+        <TextBlock Grid.Row="0" Text="🔍 Viewbox 缩放示例" 
+                   FontSize="28" FontWeight="Bold" 
+                   Foreground="#2C3E50" 
+                   HorizontalAlignment="Center" Margin="0,10,0,20"/>
+
+        <!-- 主体区域：用 UniformGrid 分成三部分（实际为2行2列） -->
+        <UniformGrid Grid.Row="1" Rows="2" Columns="2" Margin="0,0,0,10">
+
+            <!-- ============================================= -->
+            <!-- 场景一：矢量图标自适应（Viewbox 基本用法）    -->
+            <!-- ============================================= -->
+            <Border Background="White" CornerRadius="12" Margin="10" 
+                    BorderBrush="#D5D8DC" BorderThickness="1" Padding="15">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="📌 自适应图标 (Uniform)" 
+                               FontWeight="SemiBold" Foreground="#2C3E50" 
+                               HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                    <Viewbox Grid.Row="1" Stretch="Uniform" Margin="5">
+                        <Canvas Width="200" Height="200">
+                            <Ellipse Canvas.Left="0" Canvas.Top="0" Width="200" Height="200" Fill="#3498DB"/>
+                            <Path Fill="#F1C40F" Stroke="White" StrokeThickness="2"
+                                  Data="M 100,20 L 125,75 L 185,80 L 140,120 L 155,180 L 100,150 L 45,180 L 60,120 L 15,80 L 75,75 Z" />
+                            <Ellipse Canvas.Left="65" Canvas.Top="90" Width="20" Height="25" Fill="White"/>
+                            <Ellipse Canvas.Left="115" Canvas.Top="90" Width="20" Height="25" Fill="White"/>
+                            <Ellipse Canvas.Left="70" Canvas.Top="98" Width="10" Height="12" Fill="#2C3E50"/>
+                            <Ellipse Canvas.Left="120" Canvas.Top="98" Width="10" Height="12" Fill="#2C3E50"/>
+                            <Path Stroke="White" StrokeThickness="4" 
+                                  Data="M 70,140 Q 100,170 130,140" />
+                        </Canvas>
+                    </Viewbox>
+                </Grid>
+            </Border>
+
+            <!-- ============================================= -->
+            <!-- 场景二：四种 Stretch 模式对比（修正版）      -->
+            <!-- ============================================= -->
+            <Border Background="White" CornerRadius="12" Margin="10" 
+                    BorderBrush="#D5D8DC" BorderThickness="1" Padding="15">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="🎯 Stretch 模式对比" 
+                               FontWeight="SemiBold" Foreground="#2C3E50" 
+                               HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <!-- Uniform -->
+                        <Border Grid.Row="0" Grid.Column="0" Background="#ECF0F1" Margin="2" 
+                                BorderBrush="#BDC3C7" BorderThickness="1">
+                            <Grid>
+                                <!-- 此处添加 Grid 作为唯一子元素 -->
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Viewbox Grid.Row="0" Stretch="Uniform">
+                                    <Ellipse Width="60" Height="80" Fill="#E74C3C"/>
+                                </Viewbox>
+                                <TextBlock Grid.Row="1" Text="Uniform" FontSize="10" 
+                                           Foreground="#2C3E50" HorizontalAlignment="Center" Margin="0,2,0,2"/>
+                            </Grid>
+                        </Border>
+
+                        <!-- Fill -->
+                        <Border Grid.Row="0" Grid.Column="1" Background="#ECF0F1" Margin="2" 
+                                BorderBrush="#BDC3C7" BorderThickness="1">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Viewbox Grid.Row="0" Stretch="Fill">
+                                    <Ellipse Width="60" Height="80" Fill="#3498DB"/>
+                                </Viewbox>
+                                <TextBlock Grid.Row="1" Text="Fill" FontSize="10" 
+                                           Foreground="#2C3E50" HorizontalAlignment="Center" Margin="0,2,0,2"/>
+                            </Grid>
+                        </Border>
+
+                        <!-- UniformToFill -->
+                        <Border Grid.Row="1" Grid.Column="0" Background="#ECF0F1" Margin="2" 
+                                BorderBrush="#BDC3C7" BorderThickness="1">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Viewbox Grid.Row="0" Stretch="UniformToFill">
+                                    <Ellipse Width="60" Height="80" Fill="#2ECC71"/>
+                                </Viewbox>
+                                <TextBlock Grid.Row="1" Text="UniformToFill" FontSize="10" 
+                                           Foreground="#2C3E50" HorizontalAlignment="Center" Margin="0,2,0,2"/>
+                            </Grid>
+                        </Border>
+
+                        <!-- None -->
+                        <Border Grid.Row="1" Grid.Column="1" Background="#ECF0F1" Margin="2" 
+                                BorderBrush="#BDC3C7" BorderThickness="1">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Viewbox Grid.Row="0" Stretch="None">
+                                    <Ellipse Width="60" Height="80" Fill="#F39C12"/>
+                                </Viewbox>
+                                <TextBlock Grid.Row="1" Text="None" FontSize="10" 
+                                           Foreground="#2C3E50" HorizontalAlignment="Center" Margin="0,2,0,2"/>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </Border>
+
+            <!-- ============================================= -->
+            <!-- 场景三：Viewbox 在按钮中的图标自适应（修正）  -->
+            <!-- ============================================= -->
+            <Border Background="White" CornerRadius="12" Margin="10" 
+                    BorderBrush="#D5D8DC" BorderThickness="1" Padding="15">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="🔘 按钮中的图标" 
+                               FontWeight="SemiBold" Foreground="#2C3E50" 
+                               HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                    <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <!-- 第一个按钮：图标 + 文字 -->
+                        <Button Width="120" Height="50" Margin="0,5">
+                            <StackPanel Orientation="Horizontal">
+                                <Viewbox Stretch="Uniform" Width="30" Height="30">
+                                    <Canvas Width="40" Height="40">
+                                        <Ellipse Canvas.Left="0" Canvas.Top="0" Width="40" Height="40" Fill="#E67E22"/>
+                                        <TextBlock Canvas.Left="8" Canvas.Top="8" Text="★" Foreground="White" FontSize="24" FontWeight="Bold"/>
+                                    </Canvas>
+                                </Viewbox>
+                                <TextBlock Text=" 收藏" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                            </StackPanel>
+                        </Button>
+                        <!-- 第二个按钮：图标 + 文字 -->
+                        <Button Width="80" Height="30" Margin="0,5" Background="#3498DB" Foreground="White" BorderThickness="0">
+                            <StackPanel Orientation="Horizontal">
+                                <Viewbox Stretch="Uniform" Width="16" Height="16">
+                                    <Canvas Width="30" Height="30">
+                                        <Ellipse Canvas.Left="0" Canvas.Top="0" Width="30" Height="30" Fill="White"/>
+                                        <TextBlock Canvas.Left="6" Canvas.Top="3" Text="✔" Foreground="#3498DB" FontSize="22" FontWeight="Bold"/>
+                                    </Canvas>
+                                </Viewbox>
+                                <TextBlock Text=" 确认" Margin="5,0,0,0"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- ============================================= -->
+            <!-- 场景四：Viewbox 嵌套复杂布局（仪表盘数字）    -->
+            <!-- ============================================= -->
+            <Border Background="White" CornerRadius="12" Margin="10" 
+                    BorderBrush="#D5D8DC" BorderThickness="1" Padding="15">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="📊 数字仪表盘" 
+                               FontWeight="SemiBold" Foreground="#2C3E50" 
+                               HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                    <Viewbox Grid.Row="1" Stretch="Uniform" Margin="5">
+                        <Grid Width="200" Height="150">
+                            <Ellipse Width="200" Height="150" Fill="#2C3E50" Stroke="White" StrokeThickness="3"/>
+                            <TextBlock Text="85%" Foreground="White" FontSize="60" FontWeight="Bold" 
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock Text="进度" Foreground="#95A5A6" FontSize="16" 
+                                       HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20"/>
+                        </Grid>
+                    </Viewbox>
+                </Grid>
+            </Border>
+        </UniformGrid>
+    </Grid>
+</Window>
+
+<!--
+    这是 WPF 中用于自动缩放内容的利器。
+    它可以将内部的任何单个元素（图形、控件、图片等）按比例缩放，以适应给定的显示区域，常用于图标显示、矢量图形、动态仪表盘、游戏界面等场景。
+    
+    设计思路
+    - 1，Viewbox 的核心特性：
+      - 它只有一个子元素（类似 Border），但会自动缩放该子元素以填满自身区域。
+      - 通过 Stretch 属性控制缩放方式：
+        Uniform（默认）：保持宽高比，完全适配（可能有留白）。
+        Fill：拉伸填满，不保持宽高比（可能变形）。
+        UniformToFill：保持宽高比，填满整个区域，超出部分裁剪。
+        None：不缩放，按原始大小。
+      - 通过 StretchDirection 控制允许缩放的方向（Both、UpOnly、DownOnly）。
+    
+    - 2，本案例要展示的场景：
+      场景一：矢量图标自适应 —— 一个由 Path 绘制的 SVG 风格图标，放在 Viewbox 中，无论窗口大小如何变化，图标始终清晰且比例正常。
+      场景二：不同 Stretch 模式对比 —— 在一个窗口中并排展示同一个图形在四种 Stretch 模式下的效果，直观对比。
+      场景三：Viewbox 嵌入按钮或标题 —— 将 Viewbox 作为按钮内容，使按钮图标随按钮大小缩放。
+      场景四：Viewbox 嵌套复杂布局（仪表盘数字）
+    
+    - 3，为什么学 Viewbox：
+      在需要自适应图标、矢量图形、仪表盘指针等场景中，Viewbox 是最好的选择。
+      它避免了手动计算缩放比例，大大简化了开发。
+-->
