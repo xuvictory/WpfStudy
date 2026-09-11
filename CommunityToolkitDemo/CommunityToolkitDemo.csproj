@@ -1,0 +1,53 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- WPF 桌面应用 -->
+    <OutputType>WinExe</OutputType>
+    <!-- 本机仅安装 .NET 10 SDK，因此目标框架固定为 net10.0-windows -->
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+
+    <RootNamespace>CommunityToolkitDemo</RootNamespace>
+    <AssemblyName>CommunityToolkitDemo</AssemblyName>
+    <Product>智汇 POS 收银终端</Product>
+    <Version>1.0.0</Version>
+    <NeutralLanguage>zh-CN</NeutralLanguage>
+
+    <!-- 生成器会产生大量 partial 成员，关闭严格样式检查避免噪音 -->
+    <EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
+
+    <!-- 生成 XML 文档：让 IDE 提示与第三方引用都能看到注释。
+         同时抑制 CS1591（公开成员缺少 XML 注释）：本项目大量使用
+         [ObservableProperty] 生成的属性与 WPF 重写成员（OnStartup/MeasureOverride 等），
+         这类成员补注释只会产生噪音而无信息增量，真正需要说明的是"设计意图"，
+         已在相应成员上用 <remarks> 表达。 -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- MVVM 唯一必需包：ObservableObject / ObservableProperty / RelayCommand / Messenger / Ioc -->
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+    <!-- 依赖注入容器（配合 CommunityToolkit.Mvvm.DependencyInjection.Ioc 使用） -->
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.12" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- tests\ 下是独立的测试工程：必须显式排除，
+         否则 SDK 默认的 **\*.cs / **\*.xaml 通配符会把测试代码编译进主程序 -->
+    <Compile Remove="tests\**" />
+    <None Remove="tests\**" />
+    <Page Remove="tests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Markdown 模拟数据源：随程序输出到运行目录 -->
+    <None Update="Data\*.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

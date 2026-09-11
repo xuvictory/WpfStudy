@@ -1,0 +1,1103 @@
+{
+  "id": "communitytoolkitdemo",
+  "name": "communitytoolkitdemo",
+  "repo": "c:\\code\\project\\CommunityToolkitDemo",
+  "isClone": false,
+  "generatedAt": "2026-09-11T09:42:52.615Z",
+  "summary": "",
+  "techStack": {
+    "language": [],
+    "framework": [],
+    "middleware": [],
+    "tool": []
+  },
+  "tree": {
+    "name": "CommunityToolkitDemo",
+    "type": "dir",
+    "path": "",
+    "children": [
+      {
+        "name": ".codebuddy",
+        "type": "dir",
+        "path": ".codebuddy",
+        "children": [
+          {
+            "name": "plans",
+            "type": "dir",
+            "path": ".codebuddy/plans",
+            "children": [
+              {
+                "name": "CommunityToolkitDemo-POS_6bcae44c.md",
+                "type": "file",
+                "path": ".codebuddy/plans/CommunityToolkitDemo-POS_6bcae44c.md",
+                "size": 18534
+              },
+              {
+                "name": "POS_应用性能优化方案_大数据量渲染___页面切换内存___异步加载__617121c2.md",
+                "type": "file",
+                "path": ".codebuddy/plans/POS_应用性能优化方案_大数据量渲染___页面切换内存___异步加载__617121c2.md",
+                "size": 14306
+              },
+              {
+                "name": "WPF_架构审查与向后兼容优化方案_d09a956b.md",
+                "type": "file",
+                "path": ".codebuddy/plans/WPF_架构审查与向后兼容优化方案_d09a956b.md",
+                "size": 21569
+              }
+            ]
+          },
+          {
+            "name": "skills",
+            "type": "dir",
+            "path": ".codebuddy/skills",
+            "children": [
+              {
+                "name": "project-know",
+                "type": "dir",
+                "path": ".codebuddy/skills/project-know",
+                "children": [
+                  {
+                    "name": "README.md",
+                    "type": "file",
+                    "path": ".codebuddy/skills/project-know/README.md",
+                    "size": 4987
+                  },
+                  {
+                    "name": "SKILL.md",
+                    "type": "file",
+                    "path": ".codebuddy/skills/project-know/SKILL.md",
+                    "size": 6635
+                  },
+                  {
+                    "name": "assets",
+                    "type": "dir",
+                    "path": ".codebuddy/skills/project-know/assets",
+                    "children": [
+                      {
+                        "name": "icon.svg",
+                        "type": "file",
+                        "path": ".codebuddy/skills/project-know/assets/icon.svg",
+                        "size": 786
+                      },
+                      {
+                        "name": "web",
+                        "type": "dir",
+                        "path": ".codebuddy/skills/project-know/assets/web",
+                        "collapsed": true
+                      }
+                    ]
+                  },
+                  {
+                    "name": "package.json",
+                    "type": "file",
+                    "path": ".codebuddy/skills/project-know/package.json",
+                    "size": 648
+                  },
+                  {
+                    "name": "references",
+                    "type": "dir",
+                    "path": ".codebuddy/skills/project-know/references",
+                    "children": [
+                      {
+                        "name": "sample-split.js",
+                        "type": "file",
+                        "path": ".codebuddy/skills/project-know/references/sample-split.js",
+                        "size": 6526
+                      },
+                      {
+                        "name": "schema.md",
+                        "type": "file",
+                        "path": ".codebuddy/skills/project-know/references/schema.md",
+                        "size": 7109
+                      },
+                      {
+                        "name": "方法论.md",
+                        "type": "file",
+                        "path": ".codebuddy/skills/project-know/references/方法论.md",
+                        "size": 8385
+                      }
+                    ]
+                  },
+                  {
+                    "name": "scripts",
+                    "type": "dir",
+                    "path": ".codebuddy/skills/project-know/scripts",
+                    "children": [
+                      {
+                        "name": "analyze.js",
+                        "type": "file",
+                        "path": ".codebuddy/skills/project-know/scripts/analyze.js",
+                        "size": 23731
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": ".vs",
+        "type": "dir",
+        "path": ".vs",
+        "children": [
+          {
+            "name": "CommunityToolkitDemo.slnx",
+            "type": "dir",
+            "path": ".vs/CommunityToolkitDemo.slnx",
+            "children": [
+              {
+                "name": "DesignTimeBuild",
+                "type": "dir",
+                "path": ".vs/CommunityToolkitDemo.slnx/DesignTimeBuild",
+                "children": [
+                  {
+                    "name": ".dtbcache.v2",
+                    "type": "file",
+                    "path": ".vs/CommunityToolkitDemo.slnx/DesignTimeBuild/.dtbcache.v2",
+                    "size": 127710
+                  }
+                ]
+              },
+              {
+                "name": "FileContentIndex",
+                "type": "dir",
+                "path": ".vs/CommunityToolkitDemo.slnx/FileContentIndex",
+                "children": [
+                  {
+                    "name": "75f27dd0-6b0c-4c28-a771-04b8e716956d.vsidx",
+                    "type": "file",
+                    "path": ".vs/CommunityToolkitDemo.slnx/FileContentIndex/75f27dd0-6b0c-4c28-a771-04b8e716956d.vsidx",
+                    "size": 152702
+                  },
+                  {
+                    "name": "814f51e9-f26e-4a8f-8eb0-dd1784b2e7e7.vsidx",
+                    "type": "file",
+                    "path": ".vs/CommunityToolkitDemo.slnx/FileContentIndex/814f51e9-f26e-4a8f-8eb0-dd1784b2e7e7.vsidx",
+                    "size": 32420
+                  },
+                  {
+                    "name": "bba84e2a-4024-41a6-a3b8-b9b7d259b39f.vsidx",
+                    "type": "file",
+                    "path": ".vs/CommunityToolkitDemo.slnx/FileContentIndex/bba84e2a-4024-41a6-a3b8-b9b7d259b39f.vsidx",
+                    "size": 26526
+                  },
+                  {
+                    "name": "c4a99c31-45ea-40de-a69d-67532f3e7db6.vsidx",
+                    "type": "file",
+                    "path": ".vs/CommunityToolkitDemo.slnx/FileContentIndex/c4a99c31-45ea-40de-a69d-67532f3e7db6.vsidx",
+                    "size": 39720
+                  },
+                  {
+                    "name": "c8d155ed-1339-4083-84e1-164b28d7093f.vsidx",
+                    "type": "file",
+                    "path": ".vs/CommunityToolkitDemo.slnx/FileContentIndex/c8d155ed-1339-4083-84e1-164b28d7093f.vsidx",
+                    "size": 40135
+                  }
+                ]
+              },
+              {
+                "name": "v18",
+                "type": "dir",
+                "path": ".vs/CommunityToolkitDemo.slnx/v18",
+                "children": [
+                  {
+                    "name": ".futdcache.v2",
+                    "type": "file",
+                    "path": ".vs/CommunityToolkitDemo.slnx/v18/.futdcache.v2",
+                    "size": 129
+                  },
+                  {
+                    "name": ".suo",
+                    "type": "file",
+                    "path": ".vs/CommunityToolkitDemo.slnx/v18/.suo",
+                    "size": 8192
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "App.xaml",
+        "type": "file",
+        "path": "App.xaml",
+        "size": 1597
+      },
+      {
+        "name": "App.xaml.cs",
+        "type": "file",
+        "path": "App.xaml.cs",
+        "size": 11206
+      },
+      {
+        "name": "Common",
+        "type": "dir",
+        "path": "Common",
+        "children": [
+          {
+            "name": "Behaviors",
+            "type": "dir",
+            "path": "Common/Behaviors",
+            "children": [
+              {
+                "name": "AttachedProps.cs",
+                "type": "file",
+                "path": "Common/Behaviors/AttachedProps.cs",
+                "size": 8088
+              }
+            ]
+          },
+          {
+            "name": "Collection",
+            "type": "dir",
+            "path": "Common/Collection",
+            "children": [
+              {
+                "name": "RangeObservableCollection.cs",
+                "type": "file",
+                "path": "Common/Collection/RangeObservableCollection.cs",
+                "size": 3260
+              }
+            ]
+          },
+          {
+            "name": "Controls",
+            "type": "dir",
+            "path": "Common/Controls",
+            "children": [
+              {
+                "name": "CachedContentControl.cs",
+                "type": "file",
+                "path": "Common/Controls/CachedContentControl.cs",
+                "size": 2578
+              },
+              {
+                "name": "VirtualizingWrapPanel.cs",
+                "type": "file",
+                "path": "Common/Controls/VirtualizingWrapPanel.cs",
+                "size": 16698
+              }
+            ]
+          },
+          {
+            "name": "Converters",
+            "type": "dir",
+            "path": "Common/Converters",
+            "children": [
+              {
+                "name": "Converters.cs",
+                "type": "file",
+                "path": "Common/Converters/Converters.cs",
+                "size": 14254
+              }
+            ]
+          },
+          {
+            "name": "Styles",
+            "type": "dir",
+            "path": "Common/Styles",
+            "children": [
+              {
+                "name": "Colors.xaml",
+                "type": "file",
+                "path": "Common/Styles/Colors.xaml",
+                "size": 4845
+              },
+              {
+                "name": "Controls.xaml",
+                "type": "file",
+                "path": "Common/Styles/Controls.xaml",
+                "size": 38906
+              }
+            ]
+          },
+          {
+            "name": "UiDispatcher.cs",
+            "type": "file",
+            "path": "Common/UiDispatcher.cs",
+            "size": 1750
+          }
+        ]
+      },
+      {
+        "name": "CommunityToolkitDemo.csproj",
+        "type": "file",
+        "path": "CommunityToolkitDemo.csproj",
+        "size": 2324
+      },
+      {
+        "name": "Data",
+        "type": "dir",
+        "path": "Data",
+        "children": [
+          {
+            "name": "categories.md",
+            "type": "file",
+            "path": "Data/categories.md",
+            "size": 750
+          },
+          {
+            "name": "devices.md",
+            "type": "file",
+            "path": "Data/devices.md",
+            "size": 1595
+          },
+          {
+            "name": "large",
+            "type": "dir",
+            "path": "Data/large",
+            "children": [
+              {
+                "name": "products.md",
+                "type": "file",
+                "path": "Data/large/products.md",
+                "size": 8802232
+              }
+            ]
+          },
+          {
+            "name": "orders.md",
+            "type": "file",
+            "path": "Data/orders.md",
+            "size": 1528
+          },
+          {
+            "name": "products.md",
+            "type": "file",
+            "path": "Data/products.md",
+            "size": 3593
+          }
+        ]
+      },
+      {
+        "name": "Messages",
+        "type": "dir",
+        "path": "Messages",
+        "children": [
+          {
+            "name": "BarcodeScannedMessage.cs",
+            "type": "file",
+            "path": "Messages/BarcodeScannedMessage.cs",
+            "size": 405
+          },
+          {
+            "name": "CartChangedMessage.cs",
+            "type": "file",
+            "path": "Messages/CartChangedMessage.cs",
+            "size": 462
+          },
+          {
+            "name": "DataLoadedMessage.cs",
+            "type": "file",
+            "path": "Messages/DataLoadedMessage.cs",
+            "size": 491
+          },
+          {
+            "name": "DeviceAlarmMessage.cs",
+            "type": "file",
+            "path": "Messages/DeviceAlarmMessage.cs",
+            "size": 362
+          },
+          {
+            "name": "MessagePayloads.cs",
+            "type": "file",
+            "path": "Messages/MessagePayloads.cs",
+            "size": 1150
+          },
+          {
+            "name": "NavigateMessage.cs",
+            "type": "file",
+            "path": "Messages/NavigateMessage.cs",
+            "size": 599
+          },
+          {
+            "name": "PaymentCompletedMessage.cs",
+            "type": "file",
+            "path": "Messages/PaymentCompletedMessage.cs",
+            "size": 368
+          },
+          {
+            "name": "SettingsChangedMessage.cs",
+            "type": "file",
+            "path": "Messages/SettingsChangedMessage.cs",
+            "size": 516
+          },
+          {
+            "name": "StatusNotificationMessage.cs",
+            "type": "file",
+            "path": "Messages/StatusNotificationMessage.cs",
+            "size": 784
+          }
+        ]
+      },
+      {
+        "name": "Models",
+        "type": "dir",
+        "path": "Models",
+        "children": [
+          {
+            "name": "CartItem.cs",
+            "type": "file",
+            "path": "Models/CartItem.cs",
+            "size": 2445
+          },
+          {
+            "name": "DeviceInfo.cs",
+            "type": "file",
+            "path": "Models/DeviceInfo.cs",
+            "size": 1154
+          },
+          {
+            "name": "Order.cs",
+            "type": "file",
+            "path": "Models/Order.cs",
+            "size": 1436
+          },
+          {
+            "name": "PosSettings.cs",
+            "type": "file",
+            "path": "Models/PosSettings.cs",
+            "size": 1099
+          },
+          {
+            "name": "Product.cs",
+            "type": "file",
+            "path": "Models/Product.cs",
+            "size": 1135
+          },
+          {
+            "name": "ProtocolDisplay.cs",
+            "type": "file",
+            "path": "Models/ProtocolDisplay.cs",
+            "size": 2274
+          },
+          {
+            "name": "ProtocolFrame.cs",
+            "type": "file",
+            "path": "Models/ProtocolFrame.cs",
+            "size": 1717
+          },
+          {
+            "name": "ProtocolType.cs",
+            "type": "file",
+            "path": "Models/ProtocolType.cs",
+            "size": 1182
+          }
+        ]
+      },
+      {
+        "name": "Protocols",
+        "type": "dir",
+        "path": "Protocols",
+        "children": [
+          {
+            "name": "IProtocolDriver.cs",
+            "type": "file",
+            "path": "Protocols/IProtocolDriver.cs",
+            "size": 1689
+          },
+          {
+            "name": "IProtocolManager.cs",
+            "type": "file",
+            "path": "Protocols/IProtocolManager.cs",
+            "size": 2143
+          },
+          {
+            "name": "ProtocolDriverBase.cs",
+            "type": "file",
+            "path": "Protocols/ProtocolDriverBase.cs",
+            "size": 9125
+          },
+          {
+            "name": "ProtocolKeys.cs",
+            "type": "file",
+            "path": "Protocols/ProtocolKeys.cs",
+            "size": 1782
+          },
+          {
+            "name": "ProtocolManager.cs",
+            "type": "file",
+            "path": "Protocols/ProtocolManager.cs",
+            "size": 8155
+          },
+          {
+            "name": "Simulated",
+            "type": "dir",
+            "path": "Protocols/Simulated",
+            "children": [
+              {
+                "name": "ModbusTcpSimDriver.cs",
+                "type": "file",
+                "path": "Protocols/Simulated/ModbusTcpSimDriver.cs",
+                "size": 2033
+              },
+              {
+                "name": "MqttSimDriver.cs",
+                "type": "file",
+                "path": "Protocols/Simulated/MqttSimDriver.cs",
+                "size": 2190
+              },
+              {
+                "name": "OpcUaSimDriver.cs",
+                "type": "file",
+                "path": "Protocols/Simulated/OpcUaSimDriver.cs",
+                "size": 1762
+              },
+              {
+                "name": "SerialPortSimDriver.cs",
+                "type": "file",
+                "path": "Protocols/Simulated/SerialPortSimDriver.cs",
+                "size": 3947
+              },
+              {
+                "name": "SocketSimDriver.cs",
+                "type": "file",
+                "path": "Protocols/Simulated/SocketSimDriver.cs",
+                "size": 2442
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Services",
+        "type": "dir",
+        "path": "Services",
+        "children": [
+          {
+            "name": "CartLimits.cs",
+            "type": "file",
+            "path": "Services/CartLimits.cs",
+            "size": 1463
+          },
+          {
+            "name": "CartService.cs",
+            "type": "file",
+            "path": "Services/CartService.cs",
+            "size": 4578
+          },
+          {
+            "name": "CheckoutCoordinator.cs",
+            "type": "file",
+            "path": "Services/CheckoutCoordinator.cs",
+            "size": 3360
+          },
+          {
+            "name": "DialogService.cs",
+            "type": "file",
+            "path": "Services/DialogService.cs",
+            "size": 1107
+          },
+          {
+            "name": "ICartService.cs",
+            "type": "file",
+            "path": "Services/ICartService.cs",
+            "size": 1911
+          },
+          {
+            "name": "IDeviceCatalog.cs",
+            "type": "file",
+            "path": "Services/IDeviceCatalog.cs",
+            "size": 932
+          },
+          {
+            "name": "IDialogService.cs",
+            "type": "file",
+            "path": "Services/IDialogService.cs",
+            "size": 812
+          },
+          {
+            "name": "IMarkdownDataService.cs",
+            "type": "file",
+            "path": "Services/IMarkdownDataService.cs",
+            "size": 640
+          },
+          {
+            "name": "IOrderService.cs",
+            "type": "file",
+            "path": "Services/IOrderService.cs",
+            "size": 618
+          },
+          {
+            "name": "IProductCatalog.cs",
+            "type": "file",
+            "path": "Services/IProductCatalog.cs",
+            "size": 2460
+          },
+          {
+            "name": "IProductQuery.cs",
+            "type": "file",
+            "path": "Services/IProductQuery.cs",
+            "size": 2426
+          },
+          {
+            "name": "ISettingsService.cs",
+            "type": "file",
+            "path": "Services/ISettingsService.cs",
+            "size": 694
+          },
+          {
+            "name": "MarkdownDataService.cs",
+            "type": "file",
+            "path": "Services/MarkdownDataService.cs",
+            "size": 10421
+          },
+          {
+            "name": "MarkdownHeader.cs",
+            "type": "file",
+            "path": "Services/MarkdownHeader.cs",
+            "size": 3268
+          },
+          {
+            "name": "MarkdownRow.cs",
+            "type": "file",
+            "path": "Services/MarkdownRow.cs",
+            "size": 3462
+          },
+          {
+            "name": "MarkdownRowReader.cs",
+            "type": "file",
+            "path": "Services/MarkdownRowReader.cs",
+            "size": 3397
+          },
+          {
+            "name": "MarkdownTableParser.cs",
+            "type": "file",
+            "path": "Services/MarkdownTableParser.cs",
+            "size": 4402
+          },
+          {
+            "name": "MarkdownValue.cs",
+            "type": "file",
+            "path": "Services/MarkdownValue.cs",
+            "size": 2022
+          },
+          {
+            "name": "OrderService.cs",
+            "type": "file",
+            "path": "Services/OrderService.cs",
+            "size": 1461
+          },
+          {
+            "name": "PosRepository.cs",
+            "type": "file",
+            "path": "Services/PosRepository.cs",
+            "size": 12884
+          },
+          {
+            "name": "ProductQueryService.cs",
+            "type": "file",
+            "path": "Services/ProductQueryService.cs",
+            "size": 5699
+          },
+          {
+            "name": "ProtocolMessageBridge.cs",
+            "type": "file",
+            "path": "Services/ProtocolMessageBridge.cs",
+            "size": 2340
+          },
+          {
+            "name": "SettingsService.cs",
+            "type": "file",
+            "path": "Services/SettingsService.cs",
+            "size": 789
+          }
+        ]
+      },
+      {
+        "name": "ViewModels",
+        "type": "dir",
+        "path": "ViewModels",
+        "children": [
+          {
+            "name": "CashierViewModel.cs",
+            "type": "file",
+            "path": "ViewModels/CashierViewModel.cs",
+            "size": 24754
+          },
+          {
+            "name": "DeviceCardViewModel.cs",
+            "type": "file",
+            "path": "ViewModels/DeviceCardViewModel.cs",
+            "size": 2716
+          },
+          {
+            "name": "DeviceMonitorViewModel.cs",
+            "type": "file",
+            "path": "ViewModels/DeviceMonitorViewModel.cs",
+            "size": 11407
+          },
+          {
+            "name": "LiveMetricItem.cs",
+            "type": "file",
+            "path": "ViewModels/LiveMetricItem.cs",
+            "size": 1177
+          },
+          {
+            "name": "MainWindowViewModel.cs",
+            "type": "file",
+            "path": "ViewModels/MainWindowViewModel.cs",
+            "size": 11764
+          },
+          {
+            "name": "NavItem.cs",
+            "type": "file",
+            "path": "ViewModels/NavItem.cs",
+            "size": 374
+          },
+          {
+            "name": "ProtocolStatusItem.cs",
+            "type": "file",
+            "path": "ViewModels/ProtocolStatusItem.cs",
+            "size": 840
+          },
+          {
+            "name": "SettingsViewModel.cs",
+            "type": "file",
+            "path": "ViewModels/SettingsViewModel.cs",
+            "size": 7602
+          }
+        ]
+      },
+      {
+        "name": "Views",
+        "type": "dir",
+        "path": "Views",
+        "children": [
+          {
+            "name": "CashierView.xaml",
+            "type": "file",
+            "path": "Views/CashierView.xaml",
+            "size": 31820
+          },
+          {
+            "name": "CashierView.xaml.cs",
+            "type": "file",
+            "path": "Views/CashierView.xaml.cs",
+            "size": 181
+          },
+          {
+            "name": "DeviceMonitorView.xaml",
+            "type": "file",
+            "path": "Views/DeviceMonitorView.xaml",
+            "size": 30554
+          },
+          {
+            "name": "DeviceMonitorView.xaml.cs",
+            "type": "file",
+            "path": "Views/DeviceMonitorView.xaml.cs",
+            "size": 193
+          },
+          {
+            "name": "DialogWindow.xaml",
+            "type": "file",
+            "path": "Views/DialogWindow.xaml",
+            "size": 6873
+          },
+          {
+            "name": "DialogWindow.xaml.cs",
+            "type": "file",
+            "path": "Views/DialogWindow.xaml.cs",
+            "size": 7367
+          },
+          {
+            "name": "MainWindow.xaml",
+            "type": "file",
+            "path": "Views/MainWindow.xaml",
+            "size": 13064
+          },
+          {
+            "name": "MainWindow.xaml.cs",
+            "type": "file",
+            "path": "Views/MainWindow.xaml.cs",
+            "size": 776
+          },
+          {
+            "name": "SettingsView.xaml",
+            "type": "file",
+            "path": "Views/SettingsView.xaml",
+            "size": 17563
+          },
+          {
+            "name": "SettingsView.xaml.cs",
+            "type": "file",
+            "path": "Views/SettingsView.xaml.cs",
+            "size": 183
+          }
+        ]
+      },
+      {
+        "name": "docs",
+        "type": "dir",
+        "path": "docs",
+        "children": [
+          {
+            "name": "性能与内存专项分析报告.md",
+            "type": "file",
+            "path": "docs/性能与内存专项分析报告.md",
+            "size": 32648
+          },
+          {
+            "name": "架构审查报告.md",
+            "type": "file",
+            "path": "docs/架构审查报告.md",
+            "size": 25222
+          }
+        ]
+      },
+      {
+        "name": "output",
+        "type": "dir",
+        "path": "output",
+        "children": [
+          {
+            "name": "communitytoolkitdemo.json",
+            "type": "file",
+            "path": "output/communitytoolkitdemo.json",
+            "size": 31275
+          }
+        ]
+      },
+      {
+        "name": "project-know-output",
+        "type": "dir",
+        "path": "project-know-output",
+        "children": [
+          {
+            "name": "web",
+            "type": "dir",
+            "path": "project-know-output/web",
+            "children": [
+              {
+                "name": "app.js",
+                "type": "file",
+                "path": "project-know-output/web/app.js",
+                "size": 25897
+              },
+              {
+                "name": "data",
+                "type": "dir",
+                "path": "project-know-output/web/data",
+                "children": [
+                  {
+                    "name": "communitytoolkitdemo.js",
+                    "type": "file",
+                    "path": "project-know-output/web/data/communitytoolkitdemo.js",
+                    "size": 49782
+                  }
+                ]
+              },
+              {
+                "name": "data.js",
+                "type": "file",
+                "path": "project-know-output/web/data.js",
+                "size": 1828
+              },
+              {
+                "name": "index.html",
+                "type": "file",
+                "path": "project-know-output/web/index.html",
+                "size": 5731
+              },
+              {
+                "name": "styles.css",
+                "type": "file",
+                "path": "project-know-output/web/styles.css",
+                "size": 20265
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "tests",
+        "type": "dir",
+        "path": "tests",
+        "children": [
+          {
+            "name": "CommunityToolkitDemo.Tests",
+            "type": "dir",
+            "path": "tests/CommunityToolkitDemo.Tests",
+            "children": [
+              {
+                "name": "CartLimitsTests.cs",
+                "type": "file",
+                "path": "tests/CommunityToolkitDemo.Tests/CartLimitsTests.cs",
+                "size": 1745
+              },
+              {
+                "name": "CartServiceTests.cs",
+                "type": "file",
+                "path": "tests/CommunityToolkitDemo.Tests/CartServiceTests.cs",
+                "size": 5875
+              },
+              {
+                "name": "CommunityToolkitDemo.Tests.csproj",
+                "type": "file",
+                "path": "tests/CommunityToolkitDemo.Tests/CommunityToolkitDemo.Tests.csproj",
+                "size": 1257
+              },
+              {
+                "name": "ConvertersTests.cs",
+                "type": "file",
+                "path": "tests/CommunityToolkitDemo.Tests/ConvertersTests.cs",
+                "size": 6244
+              },
+              {
+                "name": "MarkdownRowReaderTests.cs",
+                "type": "file",
+                "path": "tests/CommunityToolkitDemo.Tests/MarkdownRowReaderTests.cs",
+                "size": 7862
+              },
+              {
+                "name": "MarkdownTableParserTests.cs",
+                "type": "file",
+                "path": "tests/CommunityToolkitDemo.Tests/MarkdownTableParserTests.cs",
+                "size": 3263
+              },
+              {
+                "name": "Performance",
+                "type": "dir",
+                "path": "tests/CommunityToolkitDemo.Tests/Performance",
+                "children": [
+                  {
+                    "name": "LoadBenchmarkTests.cs",
+                    "type": "file",
+                    "path": "tests/CommunityToolkitDemo.Tests/Performance/LoadBenchmarkTests.cs",
+                    "size": 9703
+                  },
+                  {
+                    "name": "PerformanceTestCollection.cs",
+                    "type": "file",
+                    "path": "tests/CommunityToolkitDemo.Tests/Performance/PerformanceTestCollection.cs",
+                    "size": 709
+                  },
+                  {
+                    "name": "QueryBenchmarkTests.cs",
+                    "type": "file",
+                    "path": "tests/CommunityToolkitDemo.Tests/Performance/QueryBenchmarkTests.cs",
+                    "size": 17540
+                  },
+                  {
+                    "name": "TestProductData.cs",
+                    "type": "file",
+                    "path": "tests/CommunityToolkitDemo.Tests/Performance/TestProductData.cs",
+                    "size": 6510
+                  }
+                ]
+              },
+              {
+                "name": "PosRepositoryIndexTests.cs",
+                "type": "file",
+                "path": "tests/CommunityToolkitDemo.Tests/PosRepositoryIndexTests.cs",
+                "size": 7921
+              },
+              {
+                "name": "ProductQueryServiceTests.cs",
+                "type": "file",
+                "path": "tests/CommunityToolkitDemo.Tests/ProductQueryServiceTests.cs",
+                "size": 7716
+              },
+              {
+                "name": "ProtocolDisplayTests.cs",
+                "type": "file",
+                "path": "tests/CommunityToolkitDemo.Tests/ProtocolDisplayTests.cs",
+                "size": 2080
+              },
+              {
+                "name": "ProtocolDriverBaseTests.cs",
+                "type": "file",
+                "path": "tests/CommunityToolkitDemo.Tests/ProtocolDriverBaseTests.cs",
+                "size": 4241
+              },
+              {
+                "name": "StaTestRunner.cs",
+                "type": "file",
+                "path": "tests/CommunityToolkitDemo.Tests/StaTestRunner.cs",
+                "size": 1360
+              },
+              {
+                "name": "VirtualizingWrapPanelTests.cs",
+                "type": "file",
+                "path": "tests/CommunityToolkitDemo.Tests/VirtualizingWrapPanelTests.cs",
+                "size": 9569
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "tools",
+        "type": "dir",
+        "path": "tools",
+        "children": [
+          {
+            "name": "GenerateProducts.ps1",
+            "type": "file",
+            "path": "tools/GenerateProducts.ps1",
+            "size": 3976
+          }
+        ]
+      }
+    ]
+  },
+  "stats": {
+    "fileCount": 132,
+    "langDist": {
+      "Markdown": 14,
+      "Other": 19,
+      "JavaScript": 7,
+      "HTML": 2,
+      "CSS": 2,
+      "JSON": 2,
+      "C#": 85,
+      "PowerShell": 1
+    }
+  },
+  "manifests": [],
+  "readme": {
+    "file": null,
+    "length": 0,
+    "summary": ""
+  },
+  "evolution": {
+    "commits": 0,
+    "recent": [],
+    "topContributors": [],
+    "branches": [],
+    "releases": []
+  },
+  "ci": {
+    "has": false,
+    "files": []
+  },
+  "tests": {
+    "has": true,
+    "dirs": [
+      "tests"
+    ]
+  },
+  "quickstart": {
+    "requirements": [],
+    "steps": [],
+    "scripts": []
+  },
+  "quality": {
+    "lint": {
+      "has": false,
+      "files": []
+    }
+  },
+  "_aiTodo": {
+    "architecture": "AI 补充：模块架构 Mermaid 图 + modules[]",
+    "deploy": "AI 补充：系统部署 Mermaid 图 + note",
+    "components": "AI 补充：功能组件矩阵 [{name,duty,entry,deps,layer}]",
+    "sequences": "AI 补充：核心链路时序图 [{title,mermaid}]",
+    "dataModel": "AI 补充：数据模型与状态流转 {summary, mermaid}（erDiagram / stateDiagram-v2）",
+    "quality": "AI 补充：quality.errorHandling（错误处理与日志说明）与 quality.summary",
+    "readme": "AI 润色：readme.summary 为连贯项目自述"
+  }
+}

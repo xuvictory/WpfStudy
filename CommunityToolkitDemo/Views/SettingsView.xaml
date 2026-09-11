@@ -1,0 +1,256 @@
+<UserControl x:Class="CommunityToolkitDemo.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:conv="clr-namespace:CommunityToolkitDemo.Common.Converters"
+             xmlns:bh="clr-namespace:CommunityToolkitDemo.Common.Behaviors"
+             Background="Transparent">
+
+    <UserControl.Resources>
+        <conv:BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+        <conv:InverseBooleanToVisibilityConverter x:Key="InverseBoolToVisibility" />
+        <conv:PaymentMethodToBooleanConverter x:Key="PaymentToBool" />
+
+        <!-- 表单输入框：校验失败时描红 -->
+        <Style x:Key="FieldBox" TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="Margin" Value="0,8,0,0" />
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border BorderBrush="{StaticResource DangerBrush}" BorderThickness="1.5" CornerRadius="8">
+                            <AdornedElementPlaceholder />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- 字段级错误文本 -->
+        <Style x:Key="FieldError" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource DangerBrush}" />
+            <Setter Property="FontSize" Value="11.5" />
+            <Setter Property="Margin" Value="2,5,0,0" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Style="{StaticResource PageRoot}" Margin="18,16,18,16">
+        <!-- PageRoot 的载入动画作用的 TranslateTransform 必须由本页面独有，避免与其他页面共享。 -->
+        <Grid.RenderTransform>
+            <TranslateTransform Y="10" />
+        </Grid.RenderTransform>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- 标题 -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <TextBlock Text="系统设置" Style="{StaticResource TitleText}" />
+            <TextBlock Text="表单校验基于 ObservableValidator + DataAnnotations" Style="{StaticResource CaptionText}"
+                       Margin="12,0,0,5" VerticalAlignment="Bottom" />
+        </StackPanel>
+
+        <Grid Grid.Row="1" Margin="0,14,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="16" />
+                <ColumnDefinition Width="400" />
+            </Grid.ColumnDefinitions>
+
+            <!-- ==================== 左侧：参数表单 ==================== -->
+            <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"
+                          Padding="0,0,6,0">
+                <StackPanel MaxWidth="760" HorizontalAlignment="Left">
+
+                    <!-- 门店信息 -->
+                    <Border Style="{StaticResource CardBorder}" Padding="18">
+                        <StackPanel>
+                            <TextBlock Text="门店信息" Style="{StaticResource SectionTitle}" />
+                            <TextBlock Text="显示在顶部状态栏与小票上" Style="{StaticResource CaptionText}" Margin="0,3,0,0" />
+
+                            <StackPanel Margin="0,16,0,0">
+                                <TextBlock Text="门店名称" Style="{StaticResource LabelText}" />
+                                <TextBox x:Name="StoreNameBox" Style="{StaticResource FieldBox}"
+                                         Text="{Binding StoreName, UpdateSourceTrigger=PropertyChanged}"
+                                         bh:AttachedProps.Placeholder="例如：智汇便利 · 001 门店" />
+                                <TextBlock Style="{StaticResource FieldError}"
+                                           Text="{Binding (Validation.Errors)/ErrorContent, ElementName=StoreNameBox}"
+                                           Visibility="{Binding (Validation.HasError), ElementName=StoreNameBox, Converter={StaticResource BoolToVisibility}}" />
+                            </StackPanel>
+
+                            <StackPanel Margin="0,12,0,0">
+                                <TextBlock Text="门店地址" Style="{StaticResource LabelText}" />
+                                <TextBox x:Name="StoreAddressBox" Style="{StaticResource FieldBox}"
+                                         Text="{Binding StoreAddress, UpdateSourceTrigger=PropertyChanged}"
+                                         bh:AttachedProps.Placeholder="用于小票底部展示" />
+                                <TextBlock Style="{StaticResource FieldError}"
+                                           Text="{Binding (Validation.Errors)/ErrorContent, ElementName=StoreAddressBox}"
+                                           Visibility="{Binding (Validation.HasError), ElementName=StoreAddressBox, Converter={StaticResource BoolToVisibility}}" />
+                            </StackPanel>
+
+                            <StackPanel Margin="0,12,0,0">
+                                <TextBlock Text="联系电话" Style="{StaticResource LabelText}" />
+                                <TextBox x:Name="PhoneBox" Style="{StaticResource FieldBox}"
+                                         Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}"
+                                         bh:AttachedProps.Placeholder="手机号或座机号，如 0755-88886666" />
+                                <TextBlock Style="{StaticResource FieldError}"
+                                           Text="{Binding (Validation.Errors)/ErrorContent, ElementName=PhoneBox}"
+                                           Visibility="{Binding (Validation.HasError), ElementName=PhoneBox, Converter={StaticResource BoolToVisibility}}" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- 小票设置 -->
+                    <Border Style="{StaticResource CardBorder}" Padding="18" Margin="0,14,0,0">
+                        <StackPanel>
+                            <TextBlock Text="小票设置" Style="{StaticResource SectionTitle}" />
+
+                            <StackPanel Margin="0,16,0,0">
+                                <TextBlock Text="小票抬头" Style="{StaticResource LabelText}" />
+                                <TextBox x:Name="HeaderBox" Style="{StaticResource FieldBox}"
+                                         Text="{Binding ReceiptHeader, UpdateSourceTrigger=PropertyChanged}"
+                                         bh:AttachedProps.Placeholder="打印在小票顶部" />
+                                <TextBlock Style="{StaticResource FieldError}"
+                                           Text="{Binding (Validation.Errors)/ErrorContent, ElementName=HeaderBox}"
+                                           Visibility="{Binding (Validation.HasError), ElementName=HeaderBox, Converter={StaticResource BoolToVisibility}}" />
+                            </StackPanel>
+
+                            <StackPanel Margin="0,12,0,0">
+                                <TextBlock Text="小票页脚" Style="{StaticResource LabelText}" />
+                                <TextBox x:Name="FooterBox" Style="{StaticResource FieldBox}"
+                                         Text="{Binding ReceiptFooter, UpdateSourceTrigger=PropertyChanged}"
+                                         bh:AttachedProps.Placeholder="打印在小票底部（可留空）" />
+                                <TextBlock Style="{StaticResource FieldError}"
+                                           Text="{Binding (Validation.Errors)/ErrorContent, ElementName=FooterBox}"
+                                           Visibility="{Binding (Validation.HasError), ElementName=FooterBox, Converter={StaticResource BoolToVisibility}}" />
+                            </StackPanel>
+
+                            <StackPanel Margin="0,12,0,0">
+                                <TextBlock Text="小票份数" Style="{StaticResource LabelText}" />
+                                <TextBox x:Name="CopiesBox" Style="{StaticResource FieldBox}" Width="140"
+                                         HorizontalAlignment="Left"
+                                         Text="{Binding ReceiptCopies, UpdateSourceTrigger=PropertyChanged}"
+                                         bh:AttachedProps.DecimalOnly="True"
+                                         bh:AttachedProps.Placeholder="1 ~ 3" />
+                                <TextBlock Style="{StaticResource FieldError}"
+                                           Text="{Binding (Validation.Errors)/ErrorContent, ElementName=CopiesBox}"
+                                           Visibility="{Binding (Validation.HasError), ElementName=CopiesBox, Converter={StaticResource BoolToVisibility}}" />
+                            </StackPanel>
+
+                            <Grid Margin="0,18,0,0">
+                                <StackPanel>
+                                    <TextBlock Text="打印订单二维码" Style="{StaticResource BodyText}" />
+                                    <TextBlock Text="在小票底部附上取货二维码占位" Style="{StaticResource CaptionText}" Margin="0,2,0,0" />
+                                </StackPanel>
+                                <CheckBox Style="{StaticResource SwitchCheckBox}" HorizontalAlignment="Right"
+                                          VerticalAlignment="Center" IsChecked="{Binding PrintQrCode}" />
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- 收款设置 -->
+                    <Border Style="{StaticResource CardBorder}" Padding="18" Margin="0,14,0,0">
+                        <StackPanel>
+                            <TextBlock Text="收款设置" Style="{StaticResource SectionTitle}" />
+
+                            <StackPanel Margin="0,16,0,0">
+                                <TextBlock Text="默认支付方式" Style="{StaticResource LabelText}" />
+                                <UniformGrid Columns="3" Margin="0,8,0,0">
+                                    <RadioButton Style="{StaticResource SegmentRadio}" Content="现金" GroupName="DefaultPayment"
+                                                 Margin="0,0,6,0"
+                                                 IsChecked="{Binding DefaultPayment, Converter={StaticResource PaymentToBool}, ConverterParameter=Cash, Mode=TwoWay}" />
+                                    <RadioButton Style="{StaticResource SegmentRadio}" Content="扫码" GroupName="DefaultPayment"
+                                                 Margin="3,0,3,0"
+                                                 IsChecked="{Binding DefaultPayment, Converter={StaticResource PaymentToBool}, ConverterParameter=QrCode, Mode=TwoWay}" />
+                                    <RadioButton Style="{StaticResource SegmentRadio}" Content="刷卡" GroupName="DefaultPayment"
+                                                 Margin="6,0,0,0"
+                                                 IsChecked="{Binding DefaultPayment, Converter={StaticResource PaymentToBool}, ConverterParameter=BankCard, Mode=TwoWay}" />
+                                </UniformGrid>
+                            </StackPanel>
+
+                            <Grid Margin="0,18,0,0">
+                                <StackPanel>
+                                    <TextBlock Text="找零提示" Style="{StaticResource BodyText}" />
+                                    <TextBlock Text="在收银台显示「应找零」金额卡片" Style="{StaticResource CaptionText}" Margin="0,2,0,0" />
+                                </StackPanel>
+                                <CheckBox Style="{StaticResource SwitchCheckBox}" HorizontalAlignment="Right"
+                                          VerticalAlignment="Center" IsChecked="{Binding ShowChangeHint}" />
+                            </Grid>
+
+                            <Grid Margin="0,18,0,0">
+                                <StackPanel>
+                                    <TextBlock Text="允许超库存销售" Style="{StaticResource BodyText}" />
+                                    <TextBlock Text="开启后加购不再受商品库存上限限制" Style="{StaticResource CaptionText}" Margin="0,2,0,0" />
+                                </StackPanel>
+                                <CheckBox Style="{StaticResource SwitchCheckBox}" HorizontalAlignment="Right"
+                                          VerticalAlignment="Center" IsChecked="{Binding AllowOversell}" />
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- ==================== 右侧：预览与操作 ==================== -->
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <!-- 校验状态 -->
+                <Border Grid.Row="0" Style="{StaticResource CardBorder}" Padding="18">
+                    <Grid>
+                        <StackPanel Margin="0,0,86,0">
+                            <TextBlock Text="表单校验" Style="{StaticResource SectionTitle}" />
+                            <TextBlock Text="{Binding ValidationSummary}" Style="{StaticResource CaptionText}"
+                                       Margin="0,8,0,0" TextWrapping="Wrap" />
+                        </StackPanel>
+
+                        <Border Style="{StaticResource BadgeSuccess}" HorizontalAlignment="Right" VerticalAlignment="Top"
+                                Visibility="{Binding HasErrors, Converter={StaticResource InverseBoolToVisibility}}">
+                            <TextBlock Text="校验通过" FontSize="11" Foreground="{StaticResource SuccessBrush}" />
+                        </Border>
+                        <Border Style="{StaticResource BadgeDanger}" HorizontalAlignment="Right" VerticalAlignment="Top"
+                                Visibility="{Binding HasErrors, Converter={StaticResource BoolToVisibility}}">
+                            <TextBlock Text="存在错误" FontSize="11" Foreground="{StaticResource DangerBrush}" />
+                        </Border>
+                    </Grid>
+                </Border>
+
+                <!-- 小票预览 -->
+                <Border Grid.Row="1" Style="{StaticResource CardBorder}" Padding="18" Margin="0,14,0,0">
+                    <StackPanel>
+                        <TextBlock Text="小票预览" Style="{StaticResource SectionTitle}" />
+                        <TextBlock Text="抬头 / 页脚 / 份数变化时实时刷新" Style="{StaticResource CaptionText}" Margin="0,3,0,0" />
+                        <Border Style="{StaticResource SoftCardBorder}" Margin="0,12,0,0" Padding="14,12">
+                            <TextBlock Text="{Binding ReceiptPreview}" FontFamily="{StaticResource MonoFontFamily}"
+                                       FontSize="11.5" LineHeight="19" TextWrapping="Wrap"
+                                       Foreground="{StaticResource TextSecondaryBrush}" />
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- 操作 -->
+                <Border Grid.Row="2" Style="{StaticResource CardBorder}" Padding="18" Margin="0,14,0,0"
+                        VerticalAlignment="Bottom">
+                    <StackPanel>
+                        <Button Style="{StaticResource AccentButton}" Height="46" Command="{Binding SaveCommand}"
+                                AutomationProperties.Name="保存设置">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="&#xE74E;" FontFamily="{StaticResource IconFontFamily}" FontSize="15"
+                                           VerticalAlignment="Center" />
+                                <TextBlock Text="保存设置" Margin="8,0,0,0" FontSize="15" FontWeight="SemiBold"
+                                           VerticalAlignment="Center" />
+                            </StackPanel>
+                        </Button>
+                        <Button Style="{StaticResource SecondaryButton}" Content="恢复出厂默认" Margin="0,10,0,0"
+                                Command="{Binding ResetCommand}" />
+                        <TextBlock Style="{StaticResource CaptionText}" Margin="0,12,0,0" TextWrapping="Wrap"
+                                   Text="保存后立即生效：门店名称同步顶部状态栏，默认支付方式与找零提示同步收银台，超库存销售同步购物车规则。" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

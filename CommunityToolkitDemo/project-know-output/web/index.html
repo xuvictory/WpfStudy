@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>项目一点通 · Project Know</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Mermaid 已改为 app.js 按需懒加载（首屏不阻塞，空闲时预取，切到图表区才渲染）。
+       如需完全离线：下载 mermaid.min.js 到本地，并把 app.js 顶部的 MERMAID_SRC 改成本地路径即可。 -->
+</head>
+<body>
+  <!-- 背景网格 -->
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <!-- 顶部导航 -->
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <span class="brand-name">Project&nbsp;Know</span>
+      <span class="brand-sub">项目一点通</span>
+    </div>
+    <nav class="proj-switch" id="projSwitch" aria-label="项目切换"></nav>
+  </header>
+
+  <!-- 锚点导航 -->
+  <nav class="anchors" id="anchors" aria-label="区块导航"></nav>
+
+  <main id="content">
+    <!-- Hero 概览 -->
+    <section class="hero" id="overview">
+      <div class="hero-inner">
+        <h1 class="hero-title" id="heroTitle"></h1>
+        <div class="hero-card glass">
+          <p class="hero-desc" id="heroDesc"></p>
+          <div class="hero-meta" id="heroMeta"></div>
+          <div class="hero-chips" id="heroChips"></div>
+        </div>
+        <div class="hero-actions">
+          <button class="btn btn-primary" id="btnPrimary">浏览项目架构</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- README 项目自述 -->
+    <section class="block" id="readme">
+      <div class="block-head"><h2>README 项目自述</h2><span class="block-sub">定位与价值</span></div>
+      <div class="card glass readme-card">
+        <p class="readme-summary" id="readmeSummary"></p>
+        <div class="readme-meta" id="readmeMeta"></div>
+      </div>
+    </section>
+
+    <!-- 技术栈 -->
+    <section class="block" id="tech">
+      <div class="block-head"><h2>技术栈</h2><span class="block-sub">Tech Stack</span></div>
+      <div class="tech-wrap" id="techWrap"></div>
+    </section>
+
+    <!-- 模块架构 -->
+    <section class="block" id="arch">
+      <div class="block-head"><h2>模块架构图</h2><span class="block-sub">Architecture</span></div>
+      <p class="arch-summary" id="archSummary"></p>
+      <div class="card glass">
+        <div class="mermaid" id="archMermaid"></div>
+      </div>
+      <div class="module-grid" id="moduleGrid"></div>
+    </section>
+
+    <!-- 系统部署 -->
+    <section class="block" id="deploy">
+      <div class="block-head"><h2>系统部署图</h2><span class="block-sub">Deployment</span></div>
+      <div class="card glass">
+        <div class="mermaid" id="deployMermaid"></div>
+      </div>
+      <p class="deploy-note" id="deployNote"></p>
+    </section>
+
+    <!-- 功能组件矩阵 -->
+    <section class="block" id="components">
+      <div class="block-head"><h2>功能组件矩阵</h2><span class="block-sub">Components</span></div>
+      <div class="comp-layers" id="compLayers"></div>
+    </section>
+
+    <!-- 核心链路时序 -->
+    <section class="block" id="sequences">
+      <div class="block-head"><h2>核心链路时序图</h2><span class="block-sub">Sequences</span></div>
+      <div class="seq-tabs" id="seqTabs"></div>
+      <div class="card glass">
+        <div class="mermaid" id="seqMermaid"></div>
+      </div>
+    </section>
+
+    <!-- 数据模型与状态流转 -->
+    <section class="block" id="data">
+      <div class="block-head"><h2>数据模型与状态流转</h2><span class="block-sub">Data Flow</span></div>
+      <p class="arch-summary" id="dataSummary"></p>
+      <div class="card glass">
+        <div class="mermaid" id="dataMermaid"></div>
+      </div>
+    </section>
+
+    <!-- 快速上手 -->
+    <section class="block" id="quickstart">
+      <div class="block-head"><h2>快速上手</h2><span class="block-sub">Quick Start</span></div>
+      <div class="qs-grid" id="qsGrid"></div>
+      <div class="card glass qs-card-wide">
+        <h4 class="qs-title">安装与运行</h4>
+        <div class="code-block" id="qsSteps"></div>
+        <h4 class="qs-title">常用脚本</h4>
+        <div id="qsScripts"></div>
+      </div>
+    </section>
+
+    <!-- 工程化与质量 -->
+    <section class="block" id="quality">
+      <div class="block-head"><h2>工程化与质量</h2><span class="block-sub">Engineering &amp; Quality</span></div>
+      <p class="arch-summary" id="qualitySummary"></p>
+      <div class="quality-grid" id="qualityGrid"></div>
+    </section>
+
+    <!-- 演进历史 -->
+    <section class="block" id="evolution">
+      <div class="block-head"><h2>演进与协作</h2><span class="block-sub">Evolution</span></div>
+      <div class="evo-grid" id="evoGrid"></div>
+      <div class="evo-meta">
+        <p class="deploy-note" id="ciInfo"></p>
+        <p class="deploy-note" id="testsInfo"></p>
+      </div>
+    </section>
+
+    <!-- 目录树 -->
+    <section class="block" id="tree">
+      <div class="block-head"><h2>目录结构</h2><span class="block-sub">File Tree</span></div>
+      <div class="card glass tree-card">
+        <div class="tree" id="treeView"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>由「项目自动认知」方法论生成 · 先地图后领土 / 假设驱动 / 以输出倒逼输入</span>
+    <span id="genTime"></span>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

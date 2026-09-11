@@ -1,0 +1,31 @@
+<Application x:Class="CommunityToolkitDemo.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:CommunityToolkitDemo.ViewModels"
+             xmlns:views="clr-namespace:CommunityToolkitDemo.Views">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Controls 已内部合并 Colors，形成单一资源链 -->
+                <ResourceDictionary Source="/CommunityToolkitDemo;component/Common/Styles/Controls.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- ==========================================================
+                 隐式 DataTemplate：ViewModel 类型 → View
+                 ContentControl 绑定 CurrentViewModel 时会自动挑选对应视图，
+                 这就是"模块化拆分 + 零代码页面切换"的关键。
+                 ========================================================== -->
+            <DataTemplate DataType="{x:Type vm:CashierViewModel}">
+                <views:CashierView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:DeviceMonitorViewModel}">
+                <views:DeviceMonitorView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:SettingsViewModel}">
+                <views:SettingsView />
+            </DataTemplate>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

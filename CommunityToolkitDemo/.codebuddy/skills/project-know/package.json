@@ -1,0 +1,27 @@
+{
+  "name": "project-know",
+  "version": "1.0.0",
+  "description": "Generate comprehensive project documentation webpages (tech stack, architecture, components, sequences, data model, quick start, evolution) from a git URL or local project folder. Skill for CodeBuddy / Claude Code.",
+  "keywords": [
+    "skill",
+    "agent",
+    "codebuddy",
+    "claude-code",
+    "documentation",
+    "mermaid",
+    "project-overview"
+  ],
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "node": ">=14"
+  },
+  "files": [
+    "SKILL.md",
+    "README.md",
+    "LICENSE",
+    "scripts/",
+    "references/",
+    "assets/"
+  ]
+}

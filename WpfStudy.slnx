@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/项目实战/">
+    <Project Path="CommunityToolkitDemo/CommunityToolkitDemo.csproj" />
+  </Folder>
   <Project Path="Lesson1/Lesson1.csproj" />
   <Project Path="Lesson2/Lesson2.csproj" />
 </Solution>

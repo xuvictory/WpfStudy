@@ -1,0 +1,435 @@
+<UserControl x:Class="CommunityToolkitDemo.Views.DeviceMonitorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:conv="clr-namespace:CommunityToolkitDemo.Common.Converters"
+             xmlns:bh="clr-namespace:CommunityToolkitDemo.Common.Behaviors"
+             xmlns:models="clr-namespace:CommunityToolkitDemo.Models"
+             Background="Transparent">
+
+    <UserControl.Resources>
+        <conv:ConnectionStateToBrushConverter x:Key="StateToBrush" />
+        <conv:ProtocolTypeToBrushConverter x:Key="ProtocolToBrush" />
+        <conv:ProtocolTypeToShortTextConverter x:Key="ProtocolToShort" />
+        <conv:ProtocolTypeToTextConverter x:Key="ProtocolToText" />
+        <conv:DirectionToArrowConverter x:Key="DirectionToArrow" />
+        <conv:BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+        <conv:CountToVisibilityConverter x:Key="CountToVisibility" />
+
+        <!-- 虚拟化列表行容器：去掉默认选中样式，行内容自行铺满 -->
+        <Style x:Key="VirtualRowItemStyle" TargetType="ListBoxItem">
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="Focusable" Value="False" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <ContentPresenter />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Style="{StaticResource PageRoot}" Margin="18,16,18,16">
+        <!-- PageRoot 的载入动画作用的 TranslateTransform 必须由本页面独有，避免与其他页面共享。 -->
+        <Grid.RenderTransform>
+            <TranslateTransform Y="10" />
+        </Grid.RenderTransform>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1.3*" />
+        </Grid.RowDefinitions>
+
+        <!-- ==================== 标题与全局操作 ==================== -->
+        <Grid Grid.Row="0">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
+                <TextBlock Text="设备监控" Style="{StaticResource TitleText}" />
+                <TextBlock Text="模拟电子秤 / 扫码枪 / 打印机 / 钱箱 / 客显屏 / 云端" Style="{StaticResource CaptionText}"
+                           Margin="12,0,0,5" VerticalAlignment="Bottom" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Border Style="{StaticResource BadgeSuccess}" Margin="0,0,8,0">
+                    <TextBlock FontSize="11.5" Foreground="{StaticResource SuccessBrush}">
+                        <Run Text="已连接 " />
+                        <Run Text="{Binding ConnectedCount, Mode=OneWay}" FontWeight="Bold" />
+                        <Run Text="/" />
+                        <Run Text="{Binding DeviceCount, Mode=OneWay}" />
+                    </TextBlock>
+                </Border>
+                <Border Style="{StaticResource BadgeNeutral}" Margin="0,0,8,0">
+                    <TextBlock FontSize="11.5" Foreground="{StaticResource TextSecondaryBrush}">
+                        <Run Text="报文 " />
+                        <Run Text="{Binding FrameCount, Mode=OneWay}" FontWeight="Bold" />
+                    </TextBlock>
+                </Border>
+                <Border Style="{StaticResource BadgeWarning}" Margin="0,0,12,0">
+                    <TextBlock FontSize="11.5" Foreground="{StaticResource WarningBrush}">
+                        <Run Text="报警 " />
+                        <Run Text="{Binding AlarmCount, Mode=OneWay}" FontWeight="Bold" />
+                    </TextBlock>
+                </Border>
+                <Button Style="{StaticResource GhostButton}" Content="全部连接" Margin="0,0,8,0"
+                        Command="{Binding ConnectAllCommand}" />
+                <Button Style="{StaticResource SecondaryButton}" Content="全部断开"
+                        Command="{Binding DisconnectAllCommand}" />
+            </StackPanel>
+        </Grid>
+
+        <!-- ==================== 报警条 ==================== -->
+        <Border Grid.Row="1" Margin="0,14,0,0" CornerRadius="10" Padding="14,10"
+                Background="{StaticResource DangerSoftBrush}" BorderBrush="{StaticResource DangerBrush}"
+                BorderThickness="1" Visibility="{Binding HasAlarm, Converter={StaticResource BoolToVisibility}}">
+            <Grid>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="&#xE7BA;" FontFamily="{StaticResource IconFontFamily}" FontSize="18"
+                               Foreground="{StaticResource DangerBrush}" VerticalAlignment="Center" />
+                    <TextBlock Margin="10,0,0,0" VerticalAlignment="Center" FontWeight="SemiBold"
+                               Foreground="{StaticResource DangerBrush}">
+                        <Run Text="{Binding CurrentAlarm.DeviceName, Mode=OneWay}" />
+                        <Run Text=" 报警：" />
+                        <Run Text="{Binding CurrentAlarm.Message, Mode=OneWay}" />
+                    </TextBlock>
+                    <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Style="{StaticResource CaptionText}">
+                        <Run Text="{Binding CurrentAlarm.At, Mode=OneWay, StringFormat='HH:mm:ss'}" />
+                    </TextBlock>
+                </StackPanel>
+                <Button Style="{StaticResource DangerButton}" Content="确认报警" HorizontalAlignment="Right"
+                        Height="32" Padding="14,0" Command="{Binding AcknowledgeAlarmCommand}" />
+            </Grid>
+        </Border>
+
+        <!-- ==================== 协议卡片区 ==================== -->
+        <ItemsControl Grid.Row="2" Margin="0,14,0,0" ItemsSource="{Binding Cards}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Rows="1" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="0,0,10,0" Padding="0" CornerRadius="10">
+                        <Border.Style>
+                            <Style TargetType="Border" BasedOn="{StaticResource FlatCardBorder}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding State}" Value="{x:Static models:ConnectionState.Connected}">
+                                        <Setter Property="BorderBrush" Value="{StaticResource SuccessSoftBrush}" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding State}" Value="{x:Static models:ConnectionState.Faulted}">
+                                        <Setter Property="BorderBrush" Value="{StaticResource DangerBrush}" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <!-- 协议色条 -->
+                            <Border Grid.Column="0" CornerRadius="10,0,0,10"
+                                    Background="{Binding Type, Converter={StaticResource ProtocolToBrush}}" />
+
+                            <StackPanel Grid.Column="1" Margin="14,13,14,13">
+                                <!-- 名称 + 状态 -->
+                                <Grid>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border Style="{StaticResource BadgeBase}" Padding="6,2"
+                                                Background="{Binding Type, Converter={StaticResource ProtocolToBrush}}">
+                                            <TextBlock Text="{Binding Type, Converter={StaticResource ProtocolToShort}}"
+                                                       FontSize="10" Foreground="White" FontWeight="SemiBold" />
+                                        </Border>
+                                        <TextBlock Text="{Binding Name}" FontSize="13.5" FontWeight="SemiBold" Margin="7,0,0,0"
+                                                   VerticalAlignment="Center" Foreground="{StaticResource TextPrimaryBrush}"
+                                                   TextTrimming="CharacterEllipsis" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                        <Ellipse Width="8" Height="8" VerticalAlignment="Center"
+                                                 Fill="{Binding State, Converter={StaticResource StateToBrush}}" />
+                                        <TextBlock Text="{Binding StateText}" FontSize="11" Margin="5,0,0,0"
+                                                   VerticalAlignment="Center" Style="{StaticResource CaptionText}" />
+                                    </StackPanel>
+                                </Grid>
+
+                                <TextBlock Text="{Binding Description}" Style="{StaticResource CaptionText}" Margin="0,8,0,0"
+                                           TextTrimming="CharacterEllipsis" />
+                                <TextBlock Text="{Binding Address}" Style="{StaticResource MonoText}" Margin="0,4,0,0"
+                                           Foreground="{StaticResource TextPrimaryBrush}" TextTrimming="CharacterEllipsis" />
+                                <TextBlock Style="{StaticResource CaptionText}" Margin="0,3,0,0">
+                                    <Run Text="{Binding IntervalText, Mode=OneWay}" />
+                                    <Run Text=" · " />
+                                    <Run Text="{Binding FaultRateText, Mode=OneWay}" />
+                                </TextBlock>
+
+                                <!-- 实时指标 -->
+                                <Border Style="{StaticResource SoftCardBorder}" Height="66" Margin="0,10,0,0" Padding="8,6">
+                                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                                        <ItemsControl ItemsSource="{Binding Metrics}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Border CornerRadius="4" Padding="4,1">
+                                                        <Border.Style>
+                                                            <Style TargetType="Border">
+                                                                <Setter Property="Background" Value="Transparent" />
+                                                                <Style.Triggers>
+                                                                    <DataTrigger Binding="{Binding IsFlashing}" Value="True">
+                                                                        <Setter Property="Background" Value="{StaticResource AmberSoftBrush}" />
+                                                                    </DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Border.Style>
+                                                        <Grid>
+                                                            <TextBlock Text="{Binding Name}" FontSize="11"
+                                                                       Foreground="{StaticResource TextSecondaryBrush}" />
+                                                            <TextBlock Text="{Binding Value}" FontSize="11.5" FontWeight="SemiBold"
+                                                                       HorizontalAlignment="Right"
+                                                                       FontFamily="{StaticResource NumberFontFamily}"
+                                                                       Foreground="{StaticResource TextPrimaryBrush}" />
+                                                        </Grid>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </ScrollViewer>
+                                </Border>
+
+                                <!-- 连接开关 -->
+                                <Button Margin="0,10,0,0" Height="34" Command="{Binding ToggleCommand}">
+                                    <Button.Style>
+                                        <Style TargetType="Button" BasedOn="{StaticResource PrimaryButton}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsConnected}" Value="True">
+                                                    <Setter Property="Background" Value="{StaticResource SurfaceBrush}" />
+                                                    <Setter Property="Foreground" Value="{StaticResource DangerBrush}" />
+                                                    <Setter Property="BorderBrush" Value="{StaticResource DividerStrongBrush}" />
+                                                    <Setter Property="BorderThickness" Value="1" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding IsBusy}" Value="True">
+                                                    <Setter Property="IsEnabled" Value="False" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                    <TextBlock Text="{Binding ToggleText}" FontSize="12.5" FontWeight="SemiBold" />
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <!-- ==================== 实时数据 ==================== -->
+        <ContentControl Grid.Row="3" Style="{StaticResource ShadowCard}" Margin="0,14,0,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" Margin="16,13,16,11">
+                    <TextBlock Text="实时数据" Style="{StaticResource SectionTitle}" />
+                    <TextBlock Text="数值更新时高亮闪烁" Style="{StaticResource CaptionText}"
+                               HorizontalAlignment="Right" VerticalAlignment="Center" />
+                </Grid>
+
+                <!-- 表头 -->
+                <Border Grid.Row="1" Background="{StaticResource SurfaceAltBrush}" Padding="16,8"
+                        BorderBrush="{StaticResource DividerBrush}" BorderThickness="0,1,0,1">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="110" />
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="110" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="协议" Style="{StaticResource LabelText}" FontWeight="SemiBold" />
+                        <TextBlock Grid.Column="1" Text="指标" Style="{StaticResource LabelText}" FontWeight="SemiBold" />
+                        <TextBlock Grid.Column="2" Text="当前值" Style="{StaticResource LabelText}" FontWeight="SemiBold" />
+                        <TextBlock Grid.Column="3" Text="更新时间" Style="{StaticResource LabelText}" FontWeight="SemiBold" />
+                    </Grid>
+                </Border>
+
+                <Grid Grid.Row="2">
+                    <ListBox Margin="16,4,10,8"
+                             Style="{StaticResource PlainListBox}"
+                             ItemsSource="{Binding Metrics}"
+                             ItemContainerStyle="{StaticResource VirtualRowItemStyle}"
+                             VirtualizingPanel.IsVirtualizing="True"
+                             VirtualizingPanel.VirtualizationMode="Recycling"
+                             VirtualizingPanel.ScrollUnit="Pixel"
+                             ScrollViewer.CanContentScroll="True"
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                             ScrollViewer.VerticalScrollBarVisibility="Auto">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border CornerRadius="6" Padding="6,5">
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Setter Property="Background" Value="Transparent" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsFlashing}" Value="True">
+                                                    <Setter Property="Background" Value="{StaticResource AmberSoftBrush}" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="110" />
+                                            <ColumnDefinition Width="200" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="110" />
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                            <Border Style="{StaticResource BadgeBase}" Padding="5,1"
+                                                    Background="{Binding Protocol, Converter={StaticResource ProtocolToBrush}}">
+                                                <TextBlock Text="{Binding Protocol, Converter={StaticResource ProtocolToShort}}"
+                                                           FontSize="9.5" Foreground="White" FontWeight="SemiBold" />
+                                            </Border>
+                                            <TextBlock Text="{Binding Protocol, Converter={StaticResource ProtocolToText}}"
+                                                       Style="{StaticResource CaptionText}" Margin="6,0,0,0"
+                                                       VerticalAlignment="Center" />
+                                        </StackPanel>
+                                        <TextBlock Grid.Column="1" Text="{Binding Name}" Style="{StaticResource BodyText}"
+                                                   VerticalAlignment="Center" TextTrimming="CharacterEllipsis" />
+                                        <TextBlock Grid.Column="2" Text="{Binding Value}" FontSize="13" FontWeight="SemiBold"
+                                                   FontFamily="{StaticResource NumberFontFamily}"
+                                                   Foreground="{StaticResource PrimaryDarkBrush}" VerticalAlignment="Center"
+                                                   TextTrimming="CharacterEllipsis" />
+                                        <TextBlock Grid.Column="3" Text="{Binding UpdatedAt, StringFormat='HH:mm:ss'}"
+                                                   Style="{StaticResource MonoText}" VerticalAlignment="Center" />
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center"
+                                Visibility="{Binding Metrics.Count, Converter={StaticResource CountToVisibility}}">
+                        <TextBlock Text="&#xE9D9;" FontFamily="{StaticResource IconFontFamily}" FontSize="30"
+                                   Foreground="{StaticResource DividerStrongBrush}" HorizontalAlignment="Center" />
+                        <TextBlock Text="连接设备后即可看到实时数据" Style="{StaticResource CaptionText}"
+                                   Margin="0,10,0,0" HorizontalAlignment="Center" />
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </ContentControl>
+
+        <!-- ==================== 报文日志 ==================== -->
+        <ContentControl Grid.Row="4" Style="{StaticResource ShadowCard}" Margin="0,14,0,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" Margin="16,13,16,11">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="报文日志" Style="{StaticResource SectionTitle}" />
+                        <TextBlock Text="原始收发报文，最多保留 200 条" Style="{StaticResource CaptionText}"
+                                   Margin="10,0,0,0" VerticalAlignment="Bottom" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <CheckBox Style="{StaticResource SwitchCheckBox}" IsChecked="{Binding IsLogPaused}"
+                                  ToolTip="暂停日志滚动（便于查看历史报文）" VerticalAlignment="Center" />
+                        <TextBlock Text="暂停" Style="{StaticResource CaptionText}" Margin="8,0,12,0"
+                                   VerticalAlignment="Center" />
+                        <Button Style="{StaticResource GhostButton}" Content="清空" Height="30" Padding="12,0"
+                                Command="{Binding ClearLogCommand}" />
+                    </StackPanel>
+                </Grid>
+
+                <!-- 表头 -->
+                <Border Grid.Row="1" Background="{StaticResource SurfaceAltBrush}" Padding="16,8"
+                        BorderBrush="{StaticResource DividerBrush}" BorderThickness="0,1,0,1">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="96" />
+                            <ColumnDefinition Width="72" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="150" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="170" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="时间" Style="{StaticResource LabelText}" FontWeight="SemiBold" />
+                        <TextBlock Grid.Column="1" Text="方向" Style="{StaticResource LabelText}" FontWeight="SemiBold" />
+                        <TextBlock Grid.Column="2" Text="协议" Style="{StaticResource LabelText}" FontWeight="SemiBold" />
+                        <TextBlock Grid.Column="3" Text="地址" Style="{StaticResource LabelText}" FontWeight="SemiBold" />
+                        <TextBlock Grid.Column="4" Text="报文内容" Style="{StaticResource LabelText}" FontWeight="SemiBold" />
+                        <TextBlock Grid.Column="5" Text="说明" Style="{StaticResource LabelText}" FontWeight="SemiBold" />
+                    </Grid>
+                </Border>
+
+                <Grid Grid.Row="2">
+                    <ListBox Margin="16,4,10,8"
+                             Style="{StaticResource PlainListBox}"
+                             ItemsSource="{Binding Logs}"
+                             ItemContainerStyle="{StaticResource VirtualRowItemStyle}"
+                             bh:AttachedProps.AutoScrollToEnd="True"
+                             VirtualizingPanel.IsVirtualizing="True"
+                             VirtualizingPanel.VirtualizationMode="Recycling"
+                             VirtualizingPanel.ScrollUnit="Pixel"
+                             ScrollViewer.CanContentScroll="True"
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                             ScrollViewer.VerticalScrollBarVisibility="Auto">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="0,2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="96" />
+                                        <ColumnDefinition Width="72" />
+                                        <ColumnDefinition Width="100" />
+                                        <ColumnDefinition Width="150" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="170" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="{Binding Timestamp, StringFormat='HH:mm:ss.fff'}"
+                                               Style="{StaticResource MonoText}" TextTrimming="CharacterEllipsis" />
+                                    <TextBlock x:Name="Dir" Grid.Column="1"
+                                               Text="{Binding Direction, Converter={StaticResource DirectionToArrow}}"
+                                               FontSize="11" FontFamily="{StaticResource AppFontFamily}"
+                                               Foreground="{StaticResource SuccessBrush}" VerticalAlignment="Center" />
+                                    <TextBlock Grid.Column="2" Text="{Binding Type, Converter={StaticResource ProtocolToShort}}"
+                                               FontSize="11" FontWeight="SemiBold"
+                                               Foreground="{Binding Type, Converter={StaticResource ProtocolToBrush}}"
+                                               VerticalAlignment="Center" />
+                                    <TextBlock Grid.Column="3" Text="{Binding Address}" Style="{StaticResource MonoText}"
+                                               VerticalAlignment="Center" TextTrimming="CharacterEllipsis" />
+                                    <TextBlock Grid.Column="4" Text="{Binding Payload}" Style="{StaticResource MonoText}"
+                                               Foreground="{StaticResource TextPrimaryBrush}" VerticalAlignment="Center"
+                                               TextTrimming="CharacterEllipsis" ToolTip="{Binding Payload}" />
+                                    <TextBlock Grid.Column="5" Text="{Binding Description}" Style="{StaticResource CaptionText}"
+                                               VerticalAlignment="Center" TextTrimming="CharacterEllipsis"
+                                               ToolTip="{Binding Description}" />
+                                </Grid>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding Direction}" Value="{x:Static models:ProtocolDirection.Out}">
+                                        <Setter TargetName="Dir" Property="Foreground" Value="{StaticResource WarningBrush}" />
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center"
+                                Visibility="{Binding Logs.Count, Converter={StaticResource CountToVisibility}}">
+                        <TextBlock Text="&#xE9F9;" FontFamily="{StaticResource IconFontFamily}" FontSize="30"
+                                   Foreground="{StaticResource DividerStrongBrush}" HorizontalAlignment="Center" />
+                        <TextBlock Text="等待设备报文……" Style="{StaticResource CaptionText}" Margin="0,10,0,0"
+                                   HorizontalAlignment="Center" />
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </ContentControl>
+    </Grid>
+</UserControl>
