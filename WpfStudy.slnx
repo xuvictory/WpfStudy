@@ -1,6 +1,7 @@
 <Solution>
   <Folder Name="/协议实战/">
     <Project Path="ComDemo/ComDemo.csproj" Id="eed71469-e11b-41fd-8cd5-dac0e2d5e5c8" />
+    <Project Path="ModbusDemo/ModbusDemo.csproj" Id="a5b79225-ec3f-44c0-863d-e3d51695da75" />
     <Project Path="SocketDemo/SocketDemo.csproj" Id="26bcdc29-de53-48c0-985a-f2ea917199b2" />
   </Folder>
   <Folder Name="/项目实战/">
