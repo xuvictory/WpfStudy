@@ -1,0 +1,23 @@
+<Window x:Class="PrismDemo.Views.NotificationDialogWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="{Binding Title}"
+        Height="Auto" Width="Auto"
+        MinWidth="360" MaxWidth="520"
+        WindowStartupLocation="CenterOwner"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="NoResize"
+        SizeToContent="WidthAndHeight"
+        ShowInTaskbar="False"
+        TextOptions.TextFormattingMode="Ideal"
+        UseLayoutRounding="True"
+        SnapsToDevicePixels="True" />
+
+<!--
+    对话框宿主窗口本身不声明任何内容：
+    Prism 的 DialogService 会把注册好的对话框视图（NotificationDialogView）
+    赋给本窗口的 Content，因此窗口只负责"无边框 + 透明 + 尺寸自适应"这几件事。
+    所有外观（遮罩、阴影、卡片）都在 NotificationDialogView.xaml 里。
+-->

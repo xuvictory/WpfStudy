@@ -1,0 +1,88 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ============================================================
+         颜色 / 画刷 / 字体 / 阴影 —— 全局设计令牌
+         使用方式：{StaticResource PrimaryBrush}
+         ============================================================ -->
+
+    <!-- 品牌主色 -->
+    <SolidColorBrush x:Key="PrimaryBrush" Color="#2563EB" />
+    <SolidColorBrush x:Key="PrimaryDarkBrush" Color="#1D4ED8" />
+    <SolidColorBrush x:Key="PrimaryLightBrush" Color="#93C5FD" />
+    <SolidColorBrush x:Key="PrimarySoftBrush" Color="#DBEAFE" />
+    <SolidColorBrush x:Key="PrimaryGhostBrush" Color="#EFF6FF" />
+
+    <!-- 背景层次 -->
+    <SolidColorBrush x:Key="AppBackgroundBrush" Color="#F1F5F9" />
+    <SolidColorBrush x:Key="SurfaceBrush" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="SurfaceAltBrush" Color="#F8FAFC" />
+    <SolidColorBrush x:Key="NavBackgroundBrush" Color="#0F172A" />
+    <SolidColorBrush x:Key="NavBackgroundAltBrush" Color="#1E293B" />
+    <SolidColorBrush x:Key="NavHoverBrush" Color="#1E293B" />
+
+    <!-- 文本 -->
+    <SolidColorBrush x:Key="TextPrimaryBrush" Color="#0F172A" />
+    <SolidColorBrush x:Key="TextSecondaryBrush" Color="#475569" />
+    <SolidColorBrush x:Key="TextMutedBrush" Color="#94A3B8" />
+    <SolidColorBrush x:Key="TextOnDarkBrush" Color="#FFFFFF" />
+    <!-- 深色底上的次级/弱化文本（浅色底的同价位令牌是 TextSecondaryBrush / TextMutedBrush） -->
+    <SolidColorBrush x:Key="TextOnDarkSoftBrush" Color="#E2E8F0" />
+    <SolidColorBrush x:Key="TextOnDarkMutedBrush" Color="#94A3B8" />
+    <SolidColorBrush x:Key="TextOnDarkDimBrush" Color="#64748B" />
+
+    <!-- 功能色 -->
+    <SolidColorBrush x:Key="SuccessBrush" Color="#16A34A" />
+    <SolidColorBrush x:Key="SuccessSoftBrush" Color="#DCFCE7" />
+    <SolidColorBrush x:Key="DangerBrush" Color="#DC2626" />
+    <SolidColorBrush x:Key="DangerSoftBrush" Color="#FEE2E2" />
+    <SolidColorBrush x:Key="WarningBrush" Color="#F97316" />
+    <SolidColorBrush x:Key="WarningSoftBrush" Color="#FFEDD5" />
+    <SolidColorBrush x:Key="AmberBrush" Color="#F59E0B" />
+    <SolidColorBrush x:Key="AmberSoftBrush" Color="#FEF3C7" />
+    <SolidColorBrush x:Key="InfoBrush" Color="#0EA5E9" />
+    <SolidColorBrush x:Key="InfoSoftBrush" Color="#E0F2FE" />
+
+    <!-- 分隔线 / 禁用 -->
+    <SolidColorBrush x:Key="DividerBrush" Color="#E2E8F0" />
+    <SolidColorBrush x:Key="DividerStrongBrush" Color="#CBD5E1" />
+    <SolidColorBrush x:Key="DividerDarkBrush" Color="#334155" />
+
+    <!-- 渐变 -->
+    <LinearGradientBrush x:Key="BrandGradientBrush" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#2563EB" Offset="0" />
+        <GradientStop Color="#7C3AED" Offset="1" />
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="PayGradientBrush" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#1D4ED8" Offset="0" />
+        <GradientStop Color="#0F172A" Offset="1" />
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="SuccessGradientBrush" StartPoint="0,0" EndPoint="1,0">
+        <GradientStop Color="#16A34A" Offset="0" />
+        <GradientStop Color="#22C55E" Offset="1" />
+    </LinearGradientBrush>
+
+    <!-- 字体 -->
+    <FontFamily x:Key="AppFontFamily">Microsoft YaHei UI, Segoe UI, Arial</FontFamily>
+    <FontFamily x:Key="MonoFontFamily">Consolas, Cascadia Mono, Courier New</FontFamily>
+    <FontFamily x:Key="NumberFontFamily">Consolas, Cascadia Mono, Microsoft YaHei UI</FontFamily>
+    <FontFamily x:Key="IconFontFamily">Segoe MDL2 Assets</FontFamily>
+
+    <!-- 阴影 -->
+    <DropShadowEffect x:Key="CardShadow" BlurRadius="18" ShadowDepth="2" Direction="270"
+                      Color="#64748B" Opacity="0.22" />
+    <DropShadowEffect x:Key="SoftShadow" BlurRadius="10" ShadowDepth="1" Direction="270"
+                      Color="#64748B" Opacity="0.16" />
+    <DropShadowEffect x:Key="PopupShadow" BlurRadius="28" ShadowDepth="6" Direction="270"
+                      Color="#0F172A" Opacity="0.28" />
+
+    <!-- 弹窗遮罩：半透明深色（ARGB 中前两位为不透明度），仅 DialogWindow 使用 -->
+    <SolidColorBrush x:Key="DialogMaskBrush" Color="#730F172A" />
+
+    <!-- 弹窗专用阴影：双层叠加，远扩散 + 近柔和，模拟真实悬浮感 -->
+    <DropShadowEffect x:Key="DialogShadowNear" BlurRadius="14" ShadowDepth="2" Direction="270"
+                      Color="#0F172A" Opacity="0.10" />
+    <DropShadowEffect x:Key="DialogShadowFar" BlurRadius="36" ShadowDepth="10" Direction="270"
+                      Color="#0F172A" Opacity="0.12" />
+
+</ResourceDictionary>

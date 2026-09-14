@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- 与被测主工程保持同一目标框架：主工程是 net10.0-windows + WPF，
+         测试要引用其中的 WPF 类型（转换器、画笔），因此测试工程同样开启 UseWPF。
+         注意：这里不会把主工程的 App.xaml 入口点带进来，xUnit 使用自己的测试宿主。 -->
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <IsPackable>false</IsPackable>
+    <RootNamespace>PrismDemo.Tests</RootNamespace>
+    <AssemblyName>PrismDemo.Tests</AssemblyName>
+    <!-- 测试工程不对外发布 XML 文档，无需生成 -->
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+    <PackageReference Include="xunit" Version="2.9.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Prism 的事件聚合器（IEventAggregator / PubSubEvent）由主工程传递引用即可获得，
+         此处不重复声明包引用，避免版本漂移。 -->
+    <ProjectReference Include="..\..\PrismDemo.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,22 @@
+<prism:PrismApplication x:Class="PrismDemo.App"
+                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:prism="http://prismlibrary.com/">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Colors 已由 Controls 内部合并，形成单一资源链 -->
+                <ResourceDictionary Source="/PrismDemo;component/Common/Styles/Controls.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+
+    <!--
+        说明：
+        Prism 之前（CommunityToolkit + 手写导航）这里挂着 3 个隐式 DataTemplate，
+        把「页面 ViewModel 类型 → 页面视图」映射交给 WPF 的内容模板机制。
+
+        换成 Prism 区域导航后不再需要：页面由 IRegionManager.RequestNavigate("ContentRegion", key)
+        驱动，视图通过 RegisterForNavigation 按 key 注册，DataTemplate 隐式映射随之删除。
+    -->
+</prism:PrismApplication>

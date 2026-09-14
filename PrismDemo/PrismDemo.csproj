@@ -1,0 +1,53 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- WPF 桌面应用 -->
+    <OutputType>WinExe</OutputType>
+    <!-- 本机仅安装 .NET 10 SDK，因此目标框架固定为 net10.0-windows -->
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+
+    <RootNamespace>PrismDemo</RootNamespace>
+    <AssemblyName>PrismDemo</AssemblyName>
+    <Product>智汇 POS 收银终端</Product>
+    <Version>1.0.0</Version>
+    <NeutralLanguage>zh-CN</NeutralLanguage>
+
+    <EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
+
+    <!-- 生成 XML 文档：让 IDE 提示与第三方引用都能看到注释。
+         同时抑制 CS1591（公开成员缺少 XML 注释）：本项目大量使用
+         Prism 的 Region/对话框约定成员与 WPF 重写成员（OnStartup/MeasureOverride 等），
+         这类成员补注释只会产生噪音而无信息增量，真正需要说明的是"设计意图"，
+         已在相应成员上用 <remarks> 表达。 -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- MVVM 框架：Prism 8.1.97。
+         一次引用即得到 PrismApplication / BindableBase / DelegateCommand /
+         IEventAggregator / RegionManager / IDialogService 全套能力。
+         容器选 DryIoc：MIT 许可、无社区许可限制，且与 Prism 官方模板一致。 -->
+    <PackageReference Include="Prism.DryIoc" Version="8.1.97" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- tests\ 下是独立的测试工程：必须显式排除，
+         否则 SDK 默认的 **\*.cs / **\*.xaml 通配符会把测试代码编译进主程序 -->
+    <Compile Remove="tests\**" />
+    <None Remove="tests\**" />
+    <Page Remove="tests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Markdown 模拟数据源：随程序输出到运行目录 -->
+    <None Update="Data\*.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

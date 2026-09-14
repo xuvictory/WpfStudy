@@ -1,0 +1,134 @@
+<UserControl x:Class="PrismDemo.Views.NotificationDialogView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             TextOptions.TextFormattingMode="Ideal"
+             UseLayoutRounding="True"
+             SnapsToDevicePixels="True">
+
+    <!--
+        对话框内容：遮罩 + 双层阴影 + 内容卡片。
+        该 UserControl 会被 Prism 的 DialogService 直接赋给宿主窗口的 Content，
+        因此窗口本身保持"无边框 + 透明"，所有外观都集中在这里。
+    -->
+    <UserControl.Resources>
+        <Style x:Key="DialogCloseButton" TargetType="Button">
+            <Setter Property="Width" Value="32" />
+            <Setter Property="Height" Value="32" />
+            <Setter Property="FontFamily" Value="{StaticResource IconFontFamily}" />
+            <Setter Property="FontSize" Value="10" />
+            <Setter Property="Foreground" Value="{StaticResource TextMutedBrush}" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Bd" Background="{TemplateBinding Background}" CornerRadius="8">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="{StaticResource SurfaceAltBrush}" />
+                                <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <!-- 半透明遮罩（颜色统一取自设计令牌，避免各处散落字面色值） -->
+    <Grid Background="{StaticResource DialogMaskBrush}" MouseDown="OnMaskMouseDown">
+        <!-- 远阴影层：负责柔和扩散的氛围感 -->
+        <Border Margin="40"
+                MinWidth="360"
+                MaxWidth="520"
+                CornerRadius="14"
+                Background="Transparent"
+                Effect="{StaticResource DialogShadowFar}">
+            <!-- 内容层：带细边框和近阴影 -->
+            <Border CornerRadius="14"
+                    Background="{StaticResource SurfaceBrush}"
+                    BorderBrush="{StaticResource DividerBrush}"
+                    BorderThickness="1"
+                    Effect="{StaticResource DialogShadowNear}">
+                <Grid Margin="22">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <!-- 标题栏 -->
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0"
+                                   Text="{Binding Title}"
+                                   Style="{StaticResource SectionTitle}"
+                                   VerticalAlignment="Center" />
+
+                        <Button Grid.Column="1"
+                                Style="{StaticResource DialogCloseButton}"
+                                Content="&#xE8BB;"
+                                Command="{Binding CancelCommand}"
+                                ToolTip="关闭" />
+                    </Grid>
+
+                    <!-- 内容区 -->
+                    <Grid Grid.Row="1" Margin="0,22,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!-- 图标（字形与配色由外观适配逻辑按通知类型写入） -->
+                        <Border x:Name="IconBorder"
+                                Grid.Column="0"
+                                Width="46" Height="46" CornerRadius="23"
+                                VerticalAlignment="Top" HorizontalAlignment="Left">
+                            <TextBlock x:Name="IconText"
+                                       FontFamily="{StaticResource IconFontFamily}"
+                                       FontSize="22"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center" />
+                        </Border>
+
+                        <!-- 消息 -->
+                        <TextBlock Grid.Column="1"
+                                   Text="{Binding Message}"
+                                   Style="{StaticResource BodyText}"
+                                   TextWrapping="Wrap"
+                                   LineHeight="22"
+                                   Margin="16,2,0,0"
+                                   VerticalAlignment="Center" />
+                    </Grid>
+
+                    <!-- 按钮区 -->
+                    <StackPanel Grid.Row="2"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Right"
+                                Margin="0,26,0,0">
+                        <Button x:Name="CancelButton"
+                                Style="{StaticResource SecondaryButton}"
+                                Content="取消"
+                                Command="{Binding CancelCommand}"
+                                MinWidth="88" />
+                        <Button x:Name="ConfirmButton"
+                                Style="{StaticResource PrimaryButton}"
+                                Content="确定"
+                                Command="{Binding ConfirmCommand}"
+                                MinWidth="88"
+                                Margin="12,0,0,0" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Border>
+    </Grid>
+</UserControl>
