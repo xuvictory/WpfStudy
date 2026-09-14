@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/协议实战/">
+    <Project Path="SocketDemo/SocketDemo.csproj" Id="26bcdc29-de53-48c0-985a-f2ea917199b2" />
+  </Folder>
   <Folder Name="/项目实战/">
     <Project Path="CommunityToolkitDemo/CommunityToolkitDemo.csproj" />
     <Project Path="PrismDemo/PrismDemo.csproj" />
